@@ -1,30 +1,28 @@
 package domain.java.domain.Cotizador;
 
 
+import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Component;
+import org.springframework.web.client.RestTemplate;
 
-
+@Component
 public final class CotizadorDolarHeroku implements Cotizador {
 
-    @Override
-    public Double cotizar() {
-        return null;
-    }
-
-  /*  RestTemplate restTemplate = new RestTemplate();
+    RestTemplate restTemplate = new RestTemplate();
     private Double precioDolar;
-    private static CotizadorDolar cotizadorDolar;
+    private static CotizadorDolarHeroku cotizadorDolar;
 
-    public  static CotizadorDolar getConfigurador() {
+    public  static CotizadorDolarHeroku getConfigurador() {
 
         if (cotizadorDolar==null) {
 
-            cotizadorDolar = new CotizadorDolar();
+            cotizadorDolar = new CotizadorDolarHeroku();
         }
         return cotizadorDolar;
     }
     @Override
-    public Double calcularPrecio(){
-        //Double valor =this.run(restTemplate).getCompra();
+    public Double cotizar(){
+        Double valor =this.run(restTemplate).getCompra();
         return valor;
     }
 
@@ -37,18 +35,17 @@ public final class CotizadorDolarHeroku implements Cotizador {
     public Double getPrecioDolar() {
         return precioDolar;
     }
-
-    @Scheduled(fixedRate = 10006030)
+    //CRON
+    @Scheduled(fixedRate = 1000*60*30)
     //@Scheduled(cron = "/01 * * *")
     public void actualizarPrecioDolar() {
         this.precioDolar = this.run(restTemplate).getCompra();
-        System.out.println("Se actualizo el precio del dolar");
+        System.out.println("Se actualizo el precio del dolar" + precioDolar);
     }
 
-    public CotizadorDolar() {
+    public CotizadorDolarHeroku() {
         super();
         this.precioDolar = this.run(restTemplate).getCompra();
     }
 
-*/
 }
