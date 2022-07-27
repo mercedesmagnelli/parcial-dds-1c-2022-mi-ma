@@ -1,2 +1,4 @@
-package domain.java.domain.Cotizador;public class CotizadorDolarSI {
+package domain.java.domain.Cotizador;
+
+public class CotizadorDolarSI {
 }

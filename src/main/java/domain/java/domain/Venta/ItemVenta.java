@@ -2,7 +2,14 @@ package domain.java.domain.Venta;
 
 import domain.java.domain.exceptions.StockInsuficienteException;
 
+import javax.persistence.*;
+
+@Entity
 public class ItemVenta {
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Integer id;
+	@ManyToOne
 	private Producto producto;
 	private int cantidad;
 	private double precioCompra;
@@ -38,7 +45,13 @@ public class ItemVenta {
 	public void setPrecioCompra(double precioCompra) {
 		this.precioCompra = precioCompra;
 	}
-	
+	public Integer getId() {
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
 	//Funciones
 	public double calcularPrecioItem(){
 		return this.cantidad * this.precioCompra;

@@ -3,7 +3,7 @@ package domain.java.domain.Cotizador;
 
 
 
-public final class CotizadorDolar implements Cotizador {
+public final class CotizadorDolarHeroku implements Cotizador {
 
     @Override
     public Double cotizar() {
