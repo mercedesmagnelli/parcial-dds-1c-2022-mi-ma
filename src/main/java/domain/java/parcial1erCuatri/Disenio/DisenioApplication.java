@@ -8,7 +8,6 @@ public class DisenioApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(DisenioApplication.class, args);
-		System.out.print("holis");
 	}
 
 }
