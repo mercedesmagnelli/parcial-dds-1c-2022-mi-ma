@@ -3,9 +3,9 @@ package parcial1erCuatri.Disenio.domain.Roles;
 import parcial1erCuatri.Disenio.domain.MedioDeNotificacion.MedioDeComunicacion;
 import parcial1erCuatri.Disenio.domain.Nivel.Bronce;
 import parcial1erCuatri.Disenio.domain.Nivel.Nivel;
-import parcial1erCuatri.Disenio.domain.Venta.CarritoDeCompras;
 import parcial1erCuatri.Disenio.domain.Venta.Venta;
 import parcial1erCuatri.Disenio.domain.exceptions.StockInsuficienteException;
+
 
 import java.time.LocalDate;
 import java.util.ArrayList;

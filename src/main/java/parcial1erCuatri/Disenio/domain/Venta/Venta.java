@@ -1,10 +1,17 @@
 package parcial1erCuatri.Disenio.domain.Venta;
 
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
 
+@Entity
 public class Venta{
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Integer id;
+	@OneToMany
+	@JoinColumn(name = "ordenDeCompra_id")
 	private Collection<ItemVenta> itemsVenta;
 	private MedioDePago medioDePago;
     private LocalDate fechaDeVenta;
@@ -15,6 +22,10 @@ public class Venta{
 
 	public void agregarBeneficio(ItemVenta item) {
 		itemsVenta.add(item);
+	}
+	
+	public Venta(){
+		super();
 	}
 
 	public Venta(
@@ -57,5 +68,28 @@ public class Venta{
 	public void setPrecioTotalConDescuento(double precioTotalConDescuento) {
 		this.precioTotalConDescuento = precioTotalConDescuento;
 	}
-	
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public Collection<ItemVenta> getItemsVenta() {
+		return itemsVenta;
+	}
+
+	public void setItemsVenta(Collection<ItemVenta> itemsVenta) {
+		this.itemsVenta = itemsVenta;
+	}
+
+	public LocalDate getFechaDeVenta() {
+		return fechaDeVenta;
+	}
+
+	public void setFechaDeVenta(LocalDate fechaDeVenta) {
+		this.fechaDeVenta = fechaDeVenta;
+	}
 }
