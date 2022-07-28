@@ -14,17 +14,22 @@ public class ItemVenta {
 	private int cantidad;
 	private double precioCompra;
 	
-	protected ItemVenta(){
+	public ItemVenta(){
 		super();
 	}
 
 	//
-	public ItemVenta(Producto producto, int cantidad) throws StockInsuficienteException {
+	public ItemVenta(Producto producto, int cantidad, Boolean esBeneficio) throws StockInsuficienteException {
 		super();
 		producto.restarStock(cantidad);
 		this.producto = producto;
 		this.cantidad = cantidad;
-		this.precioCompra = producto.getPrecio();
+		if(esBeneficio) {
+			this.precioCompra = 0;
+		}else {
+			this.precioCompra = producto.getPrecio();
+		}
+
 	}
 	
 	public Producto getProducto() {
@@ -56,9 +61,6 @@ public class ItemVenta {
 	public double calcularPrecioItem(){
 		return this.cantidad * this.precioCompra;
 	}
-/*
-	public boolean mismoProveedor(Proveedor proveedor) {
-		return this.getProducto().getProveedor().equals(proveedor);
-	}
-*/
+
+
 }

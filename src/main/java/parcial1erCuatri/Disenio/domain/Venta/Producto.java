@@ -22,7 +22,7 @@ public class Producto {
 		super();
 	}
 	
-	public Producto( String descripcion,String nombre,Double precio, int stock) {
+	public Producto(String descripcion,String nombre,Double precio, int stock) {
 		super();
 		this.descripcion = descripcion;
 		this.nombre = nombre;

@@ -3,11 +3,9 @@ package parcial1erCuatri.Disenio.domain.MedioDeNotificacion;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 
-public class MailSender implements MedioDeComunicacion {
+public class EnviadorMail implements MedioDeComunicacion {
 
     private JavaMailSender sender;
-
-
 
     public void notificar() {
         this.sendEmail("mechamagnelli@gmail.com","prueba", "hola, soy un mail");

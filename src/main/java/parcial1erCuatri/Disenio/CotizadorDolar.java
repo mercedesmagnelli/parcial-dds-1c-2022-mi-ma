@@ -9,7 +9,7 @@ import parcial1erCuatri.Disenio.domain.Cotizador.ApiPrecioDolar;
 @Component
 public final class CotizadorDolar{
     RestTemplate restTemplate = new RestTemplate();
-    private Double precioDolar;
+    private double precioDolar;
     private static CotizadorDolar cotizadorDolar;
 
     public  static CotizadorDolar getConfigurador() {
@@ -32,7 +32,7 @@ public final class CotizadorDolar{
         return precioActual;
     }
 
-    public Double getPrecioDolar() {
+    public double getPrecioDolar() {
         return precioDolar;
     }
 

@@ -1,9 +1,11 @@
 package parcial1erCuatri.Disenio.domain.Roles;
 
 import parcial1erCuatri.Disenio.domain.MedioDeNotificacion.MedioDeComunicacion;
+import parcial1erCuatri.Disenio.domain.Nivel.Bronce;
 import parcial1erCuatri.Disenio.domain.Nivel.Nivel;
 import parcial1erCuatri.Disenio.domain.Venta.CarritoDeCompras;
 import parcial1erCuatri.Disenio.domain.Venta.Venta;
+import parcial1erCuatri.Disenio.domain.exceptions.StockInsuficienteException;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -25,6 +27,10 @@ public class Cliente extends Rol {
 		this.fechaDeNac = fechaDeNacimiento;
 		this.tipoDocumento = tipoDocumento;
 		this.nroDocumento = nroDeDocumento;
+		//arranca con 0 estrellas
+		this.estrellas = 0;
+		//que arranque con Bronce seteado
+		this.nivel = new Bronce();
 		//this.medioPreferido = medio;
 	}
 	
@@ -106,8 +112,18 @@ public class Cliente extends Rol {
 	}
 
 	// Funciones
-	public void realizarComprar(Venta v) {
+	public void realizarComprar(Venta v) throws StockInsuficienteException {
 		ventas.add(v);
+		sumarEstrellas(v.getPrecioTotalConDescuento());
+		v.agregarBeneficio(nivel.beneficio());
 	}
+
+	public void sumarEstrellas(Double precio) {
+		estrellas += precio / 100;
+		if(estrellas > nivel.maximoEstrellasPermitidas()) {
+			nivel = nivel.nivelSiguiente();
+		}
+	}
+
 	
 }

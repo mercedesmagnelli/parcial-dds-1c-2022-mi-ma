@@ -10,13 +10,13 @@ public class ItemCompraTest {
   @Test
   public void calcularElTotalDeUnItem() throws StockInsuficienteException {
     Producto producto1= new Producto("Bebida" , "Coca cola", 100.0, 5);
-    ItemVenta itemDeCompra1 = new ItemVenta(producto1,2);
+    ItemVenta itemDeCompra1 = new ItemVenta(producto1,2,false);
     assertEquals(itemDeCompra1.calcularPrecioItem(),200.0);
   }
 
   @Test
   public void calcularElTotalDeUnItemQueNoTieneStock() throws StockInsuficienteException{
     Producto producto1= new Producto("Bebida" , "Coca cola", 100.0, 1);
-    assertThrows(StockInsuficienteException.class, ()-> {new ItemVenta(producto1,2);});
+    assertThrows(StockInsuficienteException.class, ()-> {new ItemVenta(producto1,2,false);});
   }
 }

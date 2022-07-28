@@ -12,6 +12,11 @@ public class Venta{
 	private double precioTotalSinDescuento;
 	private double precioTotalConDescuento;
 
+
+	public void agregarBeneficio(ItemVenta item) {
+		itemsVenta.add(item);
+	}
+
 	public Venta(
             LocalDate fechaDeVenta, MedioDePago medioDePago, double precioTotalSinDescuento , double precioTotalConDescuento) {
 		this.itemsVenta = new ArrayList<>();

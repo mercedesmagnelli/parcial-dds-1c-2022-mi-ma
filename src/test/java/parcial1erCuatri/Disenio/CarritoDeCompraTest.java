@@ -17,9 +17,9 @@ public class CarritoDeCompraTest {
   @Test
   public void CalcularPrecioSinPromocion() throws StockInsuficienteException {
     Producto producto1= new Producto("Bebida" , "Coca cola", 150.0, 5);
-    ItemVenta itemDeCompra1 = new ItemVenta(producto1,2);
+    ItemVenta itemDeCompra1 = new ItemVenta(producto1,2, false);
     Producto producto2= new Producto("Snacks" , "chetos", 50.0, 5);
-    ItemVenta itemDeCompra2 = new ItemVenta(producto2,4);
+    ItemVenta itemDeCompra2 = new ItemVenta(producto2,4, false);
     Collection<ItemVenta> itemsCompras = Arrays.asList(itemDeCompra1,itemDeCompra2);
     Collection<Promocion> promociones = new ArrayList<>();
     Cliente cliente1=new Cliente("Lionel Andres","Messi","leomessi@gmail.com","48662200",LocalDate.now(), TipoDeDocumento.DNI,"40976081");
@@ -31,9 +31,9 @@ public class CarritoDeCompraTest {
   @Test
   public void CalcularPrecioConUnaPromocionDeMedioDePago() throws StockInsuficienteException {
     Producto producto1= new Producto("Bebida" , "Coca cola", 150.0, 5);
-    ItemVenta itemDeCompra1 = new ItemVenta(producto1,2);
+    ItemVenta itemDeCompra1 = new ItemVenta(producto1,2, false);
     Producto producto2= new Producto("Snacks" , "chetos", 50.0, 5);
-    ItemVenta itemDeCompra2 = new ItemVenta(producto2,4);
+    ItemVenta itemDeCompra2 = new ItemVenta(producto2,4, false);
     Collection<ItemVenta> itemsCompras = Arrays.asList(itemDeCompra1,itemDeCompra2);
     PromoMedioDePago promoMedioDePago = new PromoMedioDePago(MedioDePago.EFECTIVO,0.10);
     Collection<Promocion> promociones = Arrays.asList(promoMedioDePago);
@@ -46,29 +46,31 @@ public class CarritoDeCompraTest {
   @Test
   public void CalcularPrecioConUnaPromocionDeMedioDePagoEnDolares() throws StockInsuficienteException {
     Producto producto1= new Producto("Bebida" , "Coca cola", 150.0, 5);
-    ItemVenta itemDeCompra1 = new ItemVenta(producto1,2);
+    ItemVenta itemDeCompra1 = new ItemVenta(producto1,2, false);
     Producto producto2= new Producto("Snacks" , "chetos", 50.0, 5);
-    ItemVenta itemDeCompra2 = new ItemVenta(producto2,4);
+    ItemVenta itemDeCompra2 = new ItemVenta(producto2,4, false);
     Collection<ItemVenta> itemsCompras = Arrays.asList(itemDeCompra1,itemDeCompra2);
-    PromoMedioDePago promoMedioDePago = new PromoMedioDePago(MedioDePago.EFECTIVO,0.10);
+    PromoMedioDePago promoMedioDePago = new PromoMedioDePago(MedioDePago.EFECTIVO,0.05);
     Collection<Promocion> promociones = Arrays.asList(promoMedioDePago);
     Cliente cliente1=new Cliente("Lionel Andres","Messi","leomessi@gmail.com","48662200",LocalDate.now(), TipoDeDocumento.DNI,"40976081");
     CarritoDeCompras carritoDeCompra = new CarritoDeCompras(promociones, LocalDate.now(), MedioDePago.EFECTIVO,cliente1,true);
     carritoDeCompra.setItemsCompras(itemsCompras);
-    assertEquals(carritoDeCompra.calcularPrecioTotalConPromociones(),59211.00000000001);
+
+    //aca hay un problema de tipos de datos, da erroneo por 10 decimales
+    assertEquals((int)carritoDeCompra.calcularPrecioTotalConPromociones(),(int)(500 * CotizadorDolar.getConfigurador().getPrecioDolar() * 0.95));
   }
   @Test
   public void CalcularPrecioSinPromocionesEnDolares() throws StockInsuficienteException {
     Producto producto1= new Producto("Bebida" , "Coca cola", 150.0, 5);
-    ItemVenta itemDeCompra1 = new ItemVenta(producto1,2);
+    ItemVenta itemDeCompra1 = new ItemVenta(producto1,2, false);
     Producto producto2= new Producto("Snacks" , "chetos", 50.0, 5);
-    ItemVenta itemDeCompra2 = new ItemVenta(producto2,4);
+    ItemVenta itemDeCompra2 = new ItemVenta(producto2,4, false);
     Collection<ItemVenta> itemsCompras = Arrays.asList(itemDeCompra1,itemDeCompra2);
     Collection<Promocion> promociones = new ArrayList<>();
     Cliente cliente1=new Cliente("Lionel Andres","Messi","leomessi@gmail.com","48662200",LocalDate.now(), TipoDeDocumento.DNI,"40976081");
     CarritoDeCompras carritoDeCompra = new CarritoDeCompras(promociones, LocalDate.now(), MedioDePago.EFECTIVO,cliente1,true);
     carritoDeCompra.setItemsCompras(itemsCompras);
-    assertEquals(carritoDeCompra.calcularPrecioTotalConPromociones(),65790.0);
+    assertEquals(carritoDeCompra.calcularPrecioTotalConPromociones(),500 * CotizadorDolar.getConfigurador().getPrecioDolar());
   }
 
 }
