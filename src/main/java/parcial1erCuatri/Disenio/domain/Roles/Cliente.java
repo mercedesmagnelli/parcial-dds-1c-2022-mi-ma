@@ -1,6 +1,6 @@
 package parcial1erCuatri.Disenio.domain.Roles;
 
-import parcial1erCuatri.Disenio.domain.MedioDeNotificacion.MedioDeComunicacion;
+
 import parcial1erCuatri.Disenio.domain.Nivel.Bronce;
 import parcial1erCuatri.Disenio.domain.Nivel.Nivel;
 import parcial1erCuatri.Disenio.domain.Venta.Venta;
@@ -22,8 +22,8 @@ public class Cliente extends Rol {
     private int estrellas;
     @Transient
     private Nivel nivel;
-    @Transient
-    private MedioDeComunicacion medioPreferido;
+
+
 
 	public Cliente(String nombre, String apellido, String mail, String telefono, LocalDate fechaDeNacimiento, TipoDeDocumento tipoDocumento, String nroDeDocumento) {
 		this.nombre = nombre;
@@ -96,13 +96,6 @@ public class Cliente extends Rol {
 		this.nivel = nivel;
 	}
 
-	public MedioDeComunicacion getMedioPreferido() {
-		return medioPreferido;
-	}
-
-	public void setMedioPreferido(MedioDeComunicacion medioPreferido) {
-		this.medioPreferido = medioPreferido;
-	}
 
 	// Funciones
 	public void realizarComprar(Venta v) throws StockInsuficienteException {
