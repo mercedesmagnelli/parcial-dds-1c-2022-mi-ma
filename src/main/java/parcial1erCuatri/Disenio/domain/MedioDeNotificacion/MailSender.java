@@ -22,7 +22,7 @@ public class MailSender {
 
     private static final String remitente = "mechamagnelli";
     // En una implementacion real esto no debería estar commiteado porque es re peligroso jajajaja
-    private static final String password = "dclqirjvwlocqvkz";
+    private static final String password = "kjqphfukervxriiv";
 
     public void enviarConGMail(String destinatario, String asunto, String cuerpo) {
 
@@ -54,6 +54,6 @@ public class MailSender {
 
 
     public void notificar() {
-        this.enviarConGMail("martimagnelli@gmail.com", "Consulta sobre el equipo", "hola hermana queria consultarte mediante la presente si pudiste instalar todo xd");
+        this.enviarConGMail("mechamagnelli@gmail.com", "Consulta sobre el equipo", "hola hermana queria consultarte mediante la presente si pudiste instalar todo xd");
     }
 }
