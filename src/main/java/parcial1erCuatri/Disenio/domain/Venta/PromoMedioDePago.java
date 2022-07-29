@@ -1,5 +1,10 @@
 package parcial1erCuatri.Disenio.domain.Venta;
 
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+
+@Entity
+@DiscriminatorValue("MedioDePago")
 public class PromoMedioDePago extends Promocion {
 	private MedioDePago medioDePago;
 	private Double porcentaje;

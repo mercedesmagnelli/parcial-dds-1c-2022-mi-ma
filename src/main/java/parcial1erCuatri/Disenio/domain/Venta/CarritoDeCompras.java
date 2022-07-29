@@ -3,16 +3,26 @@ package parcial1erCuatri.Disenio.domain.Venta;
 import parcial1erCuatri.Disenio.CotizadorDolar;
 import parcial1erCuatri.Disenio.domain.Roles.Cliente;
 
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
 
+@Entity
 public class CarritoDeCompras {
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer id;
+    @OneToMany
+    @JoinColumn(name = "carritoDeCompras_id")
     private Collection<ItemVenta> itemsVentas =new ArrayList<>();
+    @ManyToMany
     private Collection<Promocion> promociones=new ArrayList<>();
     private LocalDate fechaDeVenta;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "medioDePago")
     private MedioDePago medioDePago;
+    @OneToOne
     private Cliente cliente;
     private boolean estaEnDolares;
 
@@ -24,6 +34,10 @@ public class CarritoDeCompras {
         this.medioDePago = medioDePago;
         this.cliente=cliente;
         this.estaEnDolares=estaEnDolares;
+    }
+
+    public CarritoDeCompras() {
+        super();
     }
 
     public Collection<ItemVenta> getItemsCompras() {

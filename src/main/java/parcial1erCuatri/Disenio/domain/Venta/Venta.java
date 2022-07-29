@@ -11,10 +11,11 @@ public class Venta{
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
 	@OneToMany
-	@JoinColumn(name = "ordenDeCompra_id")
+	@JoinColumn(name = "venta_id")
 	private Collection<ItemVenta> itemsVenta;
+	@Enumerated(EnumType.STRING)
 	private MedioDePago medioDePago;
-    private LocalDate fechaDeVenta;
+	private LocalDate fechaDeVenta;
 	//Una vez que se termina de hacer la ordenDeCompra en el carrito y se la paga (Aceptandola). Se hace un new a OrdenDeCompra con todos los atributos que tenga el carrito y se agrega el precioTotalConDescuento y precioTotalSinDescuento de los métodos de carrito
 	private double precioTotalSinDescuento;
 	private double precioTotalConDescuento;

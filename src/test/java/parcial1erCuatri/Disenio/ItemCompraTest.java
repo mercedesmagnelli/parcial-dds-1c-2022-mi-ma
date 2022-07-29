@@ -1,3 +1,5 @@
+package parcial1erCuatri.Disenio;
+
 import org.junit.jupiter.api.Test;
 import parcial1erCuatri.Disenio.domain.Venta.ItemVenta;
 import parcial1erCuatri.Disenio.domain.Venta.Producto;

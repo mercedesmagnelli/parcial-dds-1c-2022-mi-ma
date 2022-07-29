@@ -2,9 +2,15 @@ package parcial1erCuatri.Disenio.domain.Venta;
 
 import parcial1erCuatri.Disenio.domain.Roles.Cliente;
 
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
 import java.util.Collection;
 
+@Entity
+@DiscriminatorValue("Membresia")
 public class Membresia extends Promocion {
+	@ManyToMany
 	private Collection<Cliente> clientes;
 	private Double porcentajeDescuento;
 
