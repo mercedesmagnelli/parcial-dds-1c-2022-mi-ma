@@ -20,9 +20,11 @@ public class CarritoDeCompraTest {
     ItemVenta itemDeCompra1 = new ItemVenta(producto1,2, false);
     Producto producto2= new Producto("Snacks" , "chetos", 50.0, 5);
     ItemVenta itemDeCompra2 = new ItemVenta(producto2,4, false);
-    Collection<ItemVenta> itemsCompras = Arrays.asList(itemDeCompra1,itemDeCompra2);
+    ArrayList<ItemVenta> itemsCompras = new ArrayList<>();
+    itemsCompras.add(itemDeCompra1);
+    itemsCompras.add(itemDeCompra2);
     Collection<Promocion> promociones = new ArrayList<>();
-    Cliente cliente1=new Cliente("Lionel Andres","Messi","leomessi@gmail.com","48662200",LocalDate.now(), TipoDeDocumento.DNI,"40976081");
+    Cliente cliente1=new Cliente("Lionel Andres","Messi","leomessi@gmail.com","48662200", TipoDeDocumento.DNI,"40976081",false);
     CarritoDeCompras carritoDeCompra = new CarritoDeCompras(promociones, LocalDate.now(), MedioDePago.EFECTIVO,cliente1,false);
     carritoDeCompra.setItemsCompras(itemsCompras);
     assertEquals(carritoDeCompra.calcularPrecioTotalConPromociones(),500.0);
@@ -34,10 +36,12 @@ public class CarritoDeCompraTest {
     ItemVenta itemDeCompra1 = new ItemVenta(producto1,2, false);
     Producto producto2= new Producto("Snacks" , "chetos", 50.0, 5);
     ItemVenta itemDeCompra2 = new ItemVenta(producto2,4, false);
-    Collection<ItemVenta> itemsCompras = Arrays.asList(itemDeCompra1,itemDeCompra2);
+    ArrayList<ItemVenta> itemsCompras = new ArrayList<>();
+    itemsCompras.add(itemDeCompra1);
+    itemsCompras.add(itemDeCompra2);
     PromoMedioDePago promoMedioDePago = new PromoMedioDePago(MedioDePago.EFECTIVO,0.10);
     Collection<Promocion> promociones = Arrays.asList(promoMedioDePago);
-    Cliente cliente1=new Cliente("Lionel Andres","Messi","leomessi@gmail.com","48662200",LocalDate.now(), TipoDeDocumento.DNI,"40976081");
+    Cliente cliente1=new Cliente("Lionel Andres","Messi","leomessi@gmail.com","48662200", TipoDeDocumento.DNI,"40976081",false);
     CarritoDeCompras carritoDeCompra = new CarritoDeCompras(promociones, LocalDate.now(), MedioDePago.EFECTIVO,cliente1,false);
     carritoDeCompra.setItemsCompras(itemsCompras);
     assertEquals(carritoDeCompra.calcularPrecioTotalConPromociones(),450.0);
@@ -49,10 +53,12 @@ public class CarritoDeCompraTest {
     ItemVenta itemDeCompra1 = new ItemVenta(producto1,2, false);
     Producto producto2= new Producto("Snacks" , "chetos", 50.0, 5);
     ItemVenta itemDeCompra2 = new ItemVenta(producto2,4, false);
-    Collection<ItemVenta> itemsCompras = Arrays.asList(itemDeCompra1,itemDeCompra2);
+    ArrayList<ItemVenta> itemsCompras = new ArrayList<>();
+    itemsCompras.add(itemDeCompra1);
+    itemsCompras.add(itemDeCompra2);
     PromoMedioDePago promoMedioDePago = new PromoMedioDePago(MedioDePago.EFECTIVO,0.05);
     Collection<Promocion> promociones = Arrays.asList(promoMedioDePago);
-    Cliente cliente1=new Cliente("Lionel Andres","Messi","leomessi@gmail.com","48662200",LocalDate.now(), TipoDeDocumento.DNI,"40976081");
+    Cliente cliente1=new Cliente("Lionel Andres","Messi","leomessi@gmail.com","48662200", TipoDeDocumento.DNI,"40976081",false);
     CarritoDeCompras carritoDeCompra = new CarritoDeCompras(promociones, LocalDate.now(), MedioDePago.EFECTIVO,cliente1,true);
     carritoDeCompra.setItemsCompras(itemsCompras);
 
@@ -65,9 +71,11 @@ public class CarritoDeCompraTest {
     ItemVenta itemDeCompra1 = new ItemVenta(producto1,2, false);
     Producto producto2= new Producto("Snacks" , "chetos", 50.0, 5);
     ItemVenta itemDeCompra2 = new ItemVenta(producto2,4, false);
-    Collection<ItemVenta> itemsCompras = Arrays.asList(itemDeCompra1,itemDeCompra2);
+    ArrayList<ItemVenta> itemsCompras = new ArrayList<>();
+    itemsCompras.add(itemDeCompra1);
+    itemsCompras.add(itemDeCompra2);
     Collection<Promocion> promociones = new ArrayList<>();
-    Cliente cliente1=new Cliente("Lionel Andres","Messi","leomessi@gmail.com","48662200",LocalDate.now(), TipoDeDocumento.DNI,"40976081");
+    Cliente cliente1=new Cliente("Lionel Andres","Messi","leomessi@gmail.com","48662200", TipoDeDocumento.DNI,"40976081",false);
     CarritoDeCompras carritoDeCompra = new CarritoDeCompras(promociones, LocalDate.now(), MedioDePago.EFECTIVO,cliente1,true);
     carritoDeCompra.setItemsCompras(itemsCompras);
     assertEquals(carritoDeCompra.calcularPrecioTotalConPromociones(),500 * CotizadorDolar.getConfigurador().getPrecioDolar());

@@ -4,15 +4,17 @@ import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 @Entity
-public class Venta{
+public class Venta {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
 	@OneToMany
 	@JoinColumn(name = "venta_id")
-	private Collection<ItemVenta> itemsVenta;
+	@OrderColumn(name = "posicion")
+	public List<ItemVenta> itemsVenta;
 	@Enumerated(EnumType.STRING)
 	private MedioDePago medioDePago;
 	private LocalDate fechaDeVenta;
@@ -29,20 +31,20 @@ public class Venta{
 		super();
 	}
 
-	public Venta(
+	public Venta(List<ItemVenta> itemsVenta,
             LocalDate fechaDeVenta, MedioDePago medioDePago, double precioTotalSinDescuento , double precioTotalConDescuento) {
-		this.itemsVenta = new ArrayList<>();
+		this.itemsVenta = itemsVenta;
 		this.medioDePago = medioDePago;
         this.fechaDeVenta=fechaDeVenta;
 		this.precioTotalSinDescuento=precioTotalSinDescuento;
 		this.precioTotalConDescuento=precioTotalConDescuento;
 	}
 
-	public Collection<ItemVenta> getItemsVentas() {
+	public List<ItemVenta> getItemsVentas() {
 		return itemsVenta;
 	}
 
-	public void setItemsVentas(Collection<ItemVenta> itemsVentas) {
+	public void setItemsVentas(ArrayList<ItemVenta> itemsVentas) {
 		this.itemsVenta = itemsVentas;
 	}
 
@@ -78,11 +80,7 @@ public class Venta{
 		this.id = id;
 	}
 
-	public Collection<ItemVenta> getItemsVenta() {
-		return itemsVenta;
-	}
-
-	public void setItemsVenta(Collection<ItemVenta> itemsVenta) {
+	public void setItemsVenta(ArrayList<ItemVenta> itemsVenta) {
 		this.itemsVenta = itemsVenta;
 	}
 

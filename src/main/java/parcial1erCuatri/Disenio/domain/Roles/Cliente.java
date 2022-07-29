@@ -1,6 +1,7 @@
 package parcial1erCuatri.Disenio.domain.Roles;
 
 
+import parcial1erCuatri.Disenio.domain.MedioDeNotificacion.MailSender;
 import parcial1erCuatri.Disenio.domain.Nivel.Bronce;
 import parcial1erCuatri.Disenio.domain.Nivel.Nivel;
 import parcial1erCuatri.Disenio.domain.Venta.Venta;
@@ -22,10 +23,12 @@ public class Cliente extends Rol {
     private int estrellas;
     @Transient
     private Nivel nivel;
+	@Transient
+	private Boolean recibirPorMail;
 
 
 
-	public Cliente(String nombre, String apellido, String mail, String telefono, LocalDate fechaDeNacimiento, TipoDeDocumento tipoDocumento, String nroDeDocumento) {
+	public Cliente(String nombre, String apellido, String mail, String telefono, TipoDeDocumento tipoDocumento, String nroDeDocumento, Boolean recibirPorMail) {
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.tipoDocumento = tipoDocumento;
@@ -37,7 +40,7 @@ public class Cliente extends Rol {
 		this.estrellas = 0;
 		//que arranque con Bronce seteado
 		this.nivel = new Bronce();
-		//this.medioPreferido = medio;
+		this.recibirPorMail = recibirPorMail;
 	}
 
 	public Cliente() {
@@ -101,7 +104,10 @@ public class Cliente extends Rol {
 	public void realizarComprar(Venta v) throws StockInsuficienteException {
 		ventas.add(v);
 		sumarEstrellas(v.getPrecioTotalConDescuento());
-		v.agregarBeneficio(nivel.beneficio());
+		//v.agregarBeneficio(nivel.beneficio());
+		if(recibirPorMail) {
+			MailSender.getInstance().enviarDetalleDeCompra(mail, v);
+		}
 	}
 
 	public void sumarEstrellas(Double precio) {

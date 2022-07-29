@@ -22,7 +22,7 @@ public class PromoMedioDePago extends Promocion {
 	@Override
 	public Double aplicar(CarritoDeCompras carritoDeCompra) {
 		if(carritoDeCompra.getMedioDePago().equals(this.medioDePago)) {
-			return carritoDeCompra.calcularPrecioTotalSinPromociones() * porcentaje;
+			return carritoDeCompra.calcularPrecio() * porcentaje;
 		}
 		return 0.0;
 	}

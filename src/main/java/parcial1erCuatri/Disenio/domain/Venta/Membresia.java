@@ -17,7 +17,7 @@ public class Membresia extends Promocion {
 	@Override
 	public Double aplicar(CarritoDeCompras carritoDeCompra) {
 		if(clientes.contains(carritoDeCompra.getCliente())) {
-			return carritoDeCompra.calcularPrecioTotalSinPromociones() * porcentajeDescuento;
+			return carritoDeCompra.calcularPrecio() * porcentajeDescuento;
 		}else {
 			return 0.0;
 		}

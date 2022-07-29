@@ -1,50 +1,78 @@
 package parcial1erCuatri.Disenio.domain.Venta;
 
+import net.bytebuddy.asm.Advice;
 import parcial1erCuatri.Disenio.CotizadorDolar;
 import parcial1erCuatri.Disenio.domain.Roles.Cliente;
+import parcial1erCuatri.Disenio.domain.exceptions.StockInsuficienteException;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 @Entity
 public class CarritoDeCompras {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
+
     @OneToMany
     @JoinColumn(name = "carritoDeCompras_id")
-    private Collection<ItemVenta> itemsVentas =new ArrayList<>();
+    @OrderColumn(name = "posicion")
+    private List<ItemVenta> itemsVentas = new ArrayList<>();
+
     @ManyToMany
-    private Collection<Promocion> promociones=new ArrayList<>();
+    private Collection<Promocion> promociones = new ArrayList<>();
+
     private LocalDate fechaDeVenta;
+
     @Enumerated(EnumType.STRING)
     @Column(name = "medioDePago")
     private MedioDePago medioDePago;
+
     @OneToOne
     private Cliente cliente;
     private boolean estaEnDolares;
 
-    public CarritoDeCompras(Collection<Promocion> promociones, LocalDate fechaDeVenta, MedioDePago medioDePago, Cliente cliente,Boolean estaEnDolares) {
+    public CarritoDeCompras() {
         super();
+    }
+
+    public CarritoDeCompras(Collection<Promocion> promociones, LocalDate fechaDeVenta, MedioDePago medioDePago, Cliente cliente,Boolean estaEnDolares) {
         this.itemsVentas = new ArrayList<>();
         this.promociones = promociones;
         this.fechaDeVenta = fechaDeVenta;
         this.medioDePago = medioDePago;
-        this.cliente=cliente;
-        this.estaEnDolares=estaEnDolares;
+        this.cliente = cliente;
+        this.estaEnDolares = estaEnDolares;
     }
 
-    public CarritoDeCompras() {
-        super();
+    public void finalizarVenta(MedioDePago mp) throws StockInsuficienteException {
+        Venta v = this.generarVenta(mp);
+        cliente.realizarComprar(v);
+        this.limpiarCarrito();
+    }
+
+    private void limpiarCarrito() {
+        this.setItemsCompras(new ArrayList<>());
+        this.setPromociones(new ArrayList<>());
+        fechaDeVenta = null;
+        medioDePago = null;
+
+    }
+
+    private Venta generarVenta(MedioDePago mp) {
+        double precioDesc = this.calcularPrecioTotalConPromociones();
+        double precioSinDesc = this.calcularPrecioTotalSinPromociones();
+        return new Venta(itemsVentas, LocalDate.now(), mp, precioSinDesc, precioDesc);
     }
 
     public Collection<ItemVenta> getItemsCompras() {
         return itemsVentas;
     }
 
-    public void setItemsCompras(Collection<ItemVenta> itemsVentas) {
+    public void setItemsCompras(ArrayList<ItemVenta> itemsVentas) {
         this.itemsVentas = itemsVentas;
     }
 
@@ -88,18 +116,29 @@ public class CarritoDeCompras {
         this.estaEnDolares = estaEnDolares;
     }
 
+    public double calcularPrecio() {
+
+        return itemsVentas.stream().mapToDouble(x->x.calcularPrecioItem()).sum();
+    }
+
     public double calcularPrecioTotalSinPromociones(){
 
-            return itemsVentas.stream().mapToDouble(x->x.calcularPrecioItem()).sum();
+        if(this.getEstaEnDolares()){
+            CotizadorDolar cotizadorDolar = CotizadorDolar.getConfigurador();
+            return this.calcularPrecio() * cotizadorDolar.getPrecioDolar();
+        }else{
+            return this.calcularPrecio();
+        }
 
     }
 
     public double calcularPrecioTotalConPromociones(){
         if(this.getEstaEnDolares()){
             CotizadorDolar cotizadorDolar = CotizadorDolar.getConfigurador();
-            return (this.calcularPrecioTotalSinPromociones()-(promociones.stream().mapToDouble(x->x.aplicar(this)).sum())) * cotizadorDolar.getPrecioDolar();
+            System.out.print("descuento de las promos: " + (promociones.stream().mapToDouble(x->x.aplicar(this)).sum()));
+            return (this.calcularPrecio() - (promociones.stream().mapToDouble(x->x.aplicar(this)).sum())) * cotizadorDolar.getPrecioDolar();
         }else{
-            return this.calcularPrecioTotalSinPromociones()-promociones.stream().mapToDouble(x->x.aplicar(this)).sum();
+            return this.calcularPrecio() - promociones.stream().mapToDouble(x->x.aplicar(this)).sum();
         }
     }
 }

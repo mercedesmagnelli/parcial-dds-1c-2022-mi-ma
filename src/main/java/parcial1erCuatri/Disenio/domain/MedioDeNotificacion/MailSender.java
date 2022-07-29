@@ -1,5 +1,8 @@
 package parcial1erCuatri.Disenio.domain.MedioDeNotificacion;
 
+import parcial1erCuatri.Disenio.domain.Venta.ItemVenta;
+import parcial1erCuatri.Disenio.domain.Venta.Venta;
+
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.Session;
@@ -53,7 +56,25 @@ public class MailSender {
     }
 
 
-    public void notificar() {
-        this.enviarConGMail("mechamagnelli@gmail.com", "Consulta sobre el equipo", "hola hermana queria consultarte mediante la presente si pudiste instalar todo xd");
+    public void enviarDetalleDeCompra(String mail, Venta v) {
+        String cuerpo = this.generarCuerpo(v);
+        this.enviarConGMail(mail, "Detalle de tu última compra en Cafe HumiTito", cuerpo);
+    }
+
+    private String generarCuerpo(Venta v) {
+        String cuerpo = "Los detalles de tu compra en nuestro café es la siguiente \n \n";
+        for(int i=0; i < v.getItemsVentas().size(); i ++){
+
+            ItemVenta itemEnIndice = v.getItemsVentas().get(i);
+            cuerpo = cuerpo + itemEnIndice.getProducto().getNombre() + "x"
+                    + itemEnIndice.getCantidad() + " \n $" + itemEnIndice.getProducto().getPrecio() * itemEnIndice.getCantidad()
+                    + "\n";
+
+           System.out.print(cuerpo);
+        }
+        cuerpo = cuerpo + "\n TOTAL DE LA COMPRA SIN DESCUENTOS: " + v.getPrecioTotalSinDescuento() +
+        "\n TOTAL DE LA COMPRA CON DESCUENTOS: " + v.getPrecioTotalConDescuento() + "\n";
+        System.out.print(cuerpo);
+        return cuerpo;
     }
 }

@@ -27,7 +27,6 @@ public class Producto {
 		this.descripcion = descripcion;
 		this.nombre = nombre;
 		this.precio= precio;
-		//this.estaDisponible = estaDisponible;
 		this.stock = stock;
 	}
 	
@@ -63,7 +62,7 @@ public class Producto {
 		this.stock = stock;
 	}
 	
-	//Funciones
+	//Métodos
 
 	public void restarStock(int cantidad) throws StockInsuficienteException {
 		if(stock<cantidad){
@@ -72,5 +71,5 @@ public class Producto {
 		this.stock= stock- cantidad;
 	}
 
-	//public double calcularPrecioEnDolar(){}
+
 }
