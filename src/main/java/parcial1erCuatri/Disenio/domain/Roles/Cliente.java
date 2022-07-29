@@ -106,7 +106,7 @@ public class Cliente extends Rol {
 		sumarEstrellas(v.getPrecioTotalConDescuento());
 		//v.agregarBeneficio(nivel.beneficio());
 		if(recibirPorMail) {
-			MailSender.getInstance().enviarDetalleDeCompra(mail, v);
+			MailSender.getInstance().enviarDetalleDeCompra(mail, v, v.getHechaEnDolares());
 		}
 	}
 

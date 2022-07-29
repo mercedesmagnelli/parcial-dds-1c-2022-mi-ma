@@ -21,6 +21,7 @@ public class Venta {
 	//Una vez que se termina de hacer la ordenDeCompra en el carrito y se la paga (Aceptandola). Se hace un new a OrdenDeCompra con todos los atributos que tenga el carrito y se agrega el precioTotalConDescuento y precioTotalSinDescuento de los métodos de carrito
 	private double precioTotalSinDescuento;
 	private double precioTotalConDescuento;
+	private Boolean hechaEnDolares;
 
 
 	public void agregarBeneficio(ItemVenta item) {
@@ -32,12 +33,17 @@ public class Venta {
 	}
 
 	public Venta(List<ItemVenta> itemsVenta,
-            LocalDate fechaDeVenta, MedioDePago medioDePago, double precioTotalSinDescuento , double precioTotalConDescuento) {
+            LocalDate fechaDeVenta, MedioDePago medioDePago, double precioTotalSinDescuento , double precioTotalConDescuento, Boolean hechaEnDolares) {
 		this.itemsVenta = itemsVenta;
 		this.medioDePago = medioDePago;
         this.fechaDeVenta=fechaDeVenta;
 		this.precioTotalSinDescuento=precioTotalSinDescuento;
 		this.precioTotalConDescuento=precioTotalConDescuento;
+		this.hechaEnDolares = hechaEnDolares;
+	}
+
+	public Boolean getHechaEnDolares() {
+		return hechaEnDolares;
 	}
 
 	public List<ItemVenta> getItemsVentas() {

@@ -56,13 +56,15 @@ public class MailSender {
     }
 
 
-    public void enviarDetalleDeCompra(String mail, Venta v) {
+    public void enviarDetalleDeCompra(String mail, Venta v, Boolean pagaEnDolares) {
         String cuerpo = this.generarCuerpo(v);
         this.enviarConGMail(mail, "Detalle de tu última compra en Cafe HumiTito", cuerpo);
     }
 
     private String generarCuerpo(Venta v) {
+
         String cuerpo = "Los detalles de tu compra en nuestro café es la siguiente \n \n";
+
         for(int i=0; i < v.getItemsVentas().size(); i ++){
 
             ItemVenta itemEnIndice = v.getItemsVentas().get(i);
@@ -72,8 +74,15 @@ public class MailSender {
 
            System.out.print(cuerpo);
         }
-        cuerpo = cuerpo + "\n TOTAL DE LA COMPRA SIN DESCUENTOS: " + v.getPrecioTotalSinDescuento() +
-        "\n TOTAL DE LA COMPRA CON DESCUENTOS: " + v.getPrecioTotalConDescuento() + "\n";
+
+        String moneda = "$";
+
+        if(v.getHechaEnDolares()) {
+            moneda = "U$D";
+        }
+
+        cuerpo = cuerpo + "\n TOTAL DE LA COMPRA SIN DESCUENTOS: " + moneda + v.getPrecioTotalSinDescuento() +
+        "\n TOTAL DE LA COMPRA CON DESCUENTOS: " + moneda + v.getPrecioTotalConDescuento() + "\n";
         System.out.print(cuerpo);
         return cuerpo;
     }

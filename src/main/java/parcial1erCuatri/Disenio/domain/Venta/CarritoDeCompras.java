@@ -65,7 +65,7 @@ public class CarritoDeCompras {
     private Venta generarVenta(MedioDePago mp) {
         double precioDesc = this.calcularPrecioTotalConPromociones();
         double precioSinDesc = this.calcularPrecioTotalSinPromociones();
-        return new Venta(itemsVentas, LocalDate.now(), mp, precioSinDesc, precioDesc);
+        return new Venta(itemsVentas, LocalDate.now(), mp, precioSinDesc, precioDesc, estaEnDolares);
     }
 
     public Collection<ItemVenta> getItemsCompras() {
@@ -125,7 +125,7 @@ public class CarritoDeCompras {
 
         if(this.getEstaEnDolares()){
             CotizadorDolar cotizadorDolar = CotizadorDolar.getConfigurador();
-            return this.calcularPrecio() * cotizadorDolar.getPrecioDolar();
+            return this.calcularPrecio() / cotizadorDolar.getPrecioDolar();
         }else{
             return this.calcularPrecio();
         }
@@ -136,7 +136,7 @@ public class CarritoDeCompras {
         if(this.getEstaEnDolares()){
             CotizadorDolar cotizadorDolar = CotizadorDolar.getConfigurador();
             System.out.print("descuento de las promos: " + (promociones.stream().mapToDouble(x->x.aplicar(this)).sum()));
-            return (this.calcularPrecio() - (promociones.stream().mapToDouble(x->x.aplicar(this)).sum())) * cotizadorDolar.getPrecioDolar();
+            return (this.calcularPrecio() - (promociones.stream().mapToDouble(x->x.aplicar(this)).sum())) / cotizadorDolar.getPrecioDolar();
         }else{
             return this.calcularPrecio() - promociones.stream().mapToDouble(x->x.aplicar(this)).sum();
         }
