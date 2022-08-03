@@ -39,7 +39,7 @@ public class DisenioApplication {
 		CarritoDeCompras carritoDeCompra = new CarritoDeCompras(promociones, LocalDate.now(), MedioDePago.EFECTIVO,cliente1,true);
 		carritoDeCompra.setItemsCompras(itemsCompras);
 
-		carritoDeCompra.finalizarVenta(MedioDePago.EFECTIVO);
+		//	carritoDeCompra.finalizarVenta(MedioDePago.EFECTIVO);
 
 	}
 

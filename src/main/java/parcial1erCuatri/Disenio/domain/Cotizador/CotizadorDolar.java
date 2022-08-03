@@ -1,10 +1,9 @@
-package parcial1erCuatri.Disenio;
+package parcial1erCuatri.Disenio.domain.Cotizador;
 
 
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
-import parcial1erCuatri.Disenio.domain.Cotizador.ApiPrecioDolar;
 
 @Component
 public final class CotizadorDolar{
@@ -20,11 +19,6 @@ public final class CotizadorDolar{
         }
         return cotizadorDolar;
     }
-	/*@Override
-	public Double calcularPrecio(){
-		//Double valor =this.run(restTemplate).getCompra();
-		return valor;
-	}*/
 
     public ApiPrecioDolar run(RestTemplate restTemplate) {
         ApiPrecioDolar precioActual = restTemplate.getForObject(
@@ -37,15 +31,13 @@ public final class CotizadorDolar{
     }
 
     @Scheduled(fixedRate = 1000)
-    //@Scheduled(cron = "*/01 * * * *")
     public void actualizarPrecioDolar() {
         this.precioDolar = this.run(restTemplate).getCompra();
         System.out.println("Se actualizo el precio del dolar");
     }
 
     public CotizadorDolar() {
-        super();
-        this.precioDolar = this.run(restTemplate).getCompra();
+          this.precioDolar = this.run(restTemplate).getCompra();
     }
 
 }

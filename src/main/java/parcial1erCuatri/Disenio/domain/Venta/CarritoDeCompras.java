@@ -1,7 +1,6 @@
 package parcial1erCuatri.Disenio.domain.Venta;
 
-import net.bytebuddy.asm.Advice;
-import parcial1erCuatri.Disenio.CotizadorDolar;
+import parcial1erCuatri.Disenio.domain.Cotizador.CotizadorDolar;
 import parcial1erCuatri.Disenio.domain.Roles.Cliente;
 import parcial1erCuatri.Disenio.domain.exceptions.StockInsuficienteException;
 
@@ -48,8 +47,10 @@ public class CarritoDeCompras {
         this.estaEnDolares = estaEnDolares;
     }
 
-    public void finalizarVenta(MedioDePago mp) throws StockInsuficienteException {
-        Venta v = this.generarVenta(mp);
+
+
+    public void finalizarVenta() throws StockInsuficienteException {
+        Venta v = this.generarVenta();
         cliente.realizarComprar(v);
         this.limpiarCarrito();
     }
@@ -62,10 +63,14 @@ public class CarritoDeCompras {
 
     }
 
-    private Venta generarVenta(MedioDePago mp) {
+    private Venta generarVenta() {
         double precioDesc = this.calcularPrecioTotalConPromociones();
         double precioSinDesc = this.calcularPrecioTotalSinPromociones();
-        return new Venta(itemsVentas, LocalDate.now(), mp, precioSinDesc, precioDesc, estaEnDolares);
+        return new Venta(itemsVentas, LocalDate.now(), medioDePago, precioSinDesc, precioDesc, estaEnDolares);
+    }
+
+    private void agregarItemAlCarrito(ItemVenta item) {
+        itemsVentas.add(item);
     }
 
     public Collection<ItemVenta> getItemsCompras() {
@@ -92,6 +97,7 @@ public class CarritoDeCompras {
         this.fechaDeVenta = fechaDeVenta;
     }
 
+
     public MedioDePago getMedioDePago() {
         return medioDePago;
     }
@@ -99,6 +105,7 @@ public class CarritoDeCompras {
     public void setMedioDePago(MedioDePago medioDePago) {
         this.medioDePago = medioDePago;
     }
+
 
     public Cliente getCliente() {
         return cliente;

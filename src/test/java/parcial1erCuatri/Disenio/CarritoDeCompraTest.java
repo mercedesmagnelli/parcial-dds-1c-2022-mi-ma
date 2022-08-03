@@ -1,6 +1,7 @@
 package parcial1erCuatri.Disenio;
 
 import org.junit.jupiter.api.Test;
+import parcial1erCuatri.Disenio.domain.Cotizador.CotizadorDolar;
 import parcial1erCuatri.Disenio.domain.Roles.Cliente;
 import parcial1erCuatri.Disenio.domain.Roles.TipoDeDocumento;
 import parcial1erCuatri.Disenio.domain.Venta.*;
@@ -14,6 +15,8 @@ import java.util.Collection;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class CarritoDeCompraTest {
+
+
   @Test
   public void CalcularPrecioSinPromocion() throws StockInsuficienteException {
     Producto producto1= new Producto("Bebida" , "Coca cola", 150.0, 5);

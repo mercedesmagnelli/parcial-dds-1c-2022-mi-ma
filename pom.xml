@@ -17,6 +17,13 @@
 		<java.version>1.8</java.version>
 	</properties>
 	<dependencies>
+		<!-- JPA Persistence Dependencies -->
+		<dependency>
+			<groupId>org.uqbar-project</groupId>
+			<artifactId>jpa-java8-extras</artifactId>
+			<version>1.0-alpha-1</version>
+		</dependency>
+
 		<dependency>
 			<groupId>org.junit.jupiter</groupId>
 			<artifactId>junit-jupiter-api</artifactId>
@@ -69,6 +76,12 @@
 			<artifactId>spring-boot-starter-data-rest</artifactId>
 		</dependency>
 
+		<dependency>
+			<groupId>org.hsqldb</groupId>
+			<artifactId>hsqldb</artifactId>
+			<version>2.4.0</version>
+			<scope>test</scope>
+		</dependency>
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -80,6 +93,7 @@
 			<scope>runtime</scope>
 		</dependency>
 	</dependencies>
+
 
 	<build>
 		<plugins>

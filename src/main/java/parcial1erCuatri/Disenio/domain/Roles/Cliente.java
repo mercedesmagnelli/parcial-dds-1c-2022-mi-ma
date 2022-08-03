@@ -17,16 +17,14 @@ import java.util.Collection;
 @DiscriminatorValue("C")
 public class Cliente extends Rol {
     //cambiar nombre a comprasRealizadas
-		@OneToMany
-		@JoinColumn(name = "cliente_id")
-		private Collection<Venta> ventas;
+	@OneToMany
+	@JoinColumn(name = "cliente_id")
+	private Collection<Venta> ventas;
     private int estrellas;
     @Transient
     private Nivel nivel;
 	@Transient
 	private Boolean recibirPorMail;
-
-
 
 	public Cliente(String nombre, String apellido, String mail, String telefono, TipoDeDocumento tipoDocumento, String nroDeDocumento, Boolean recibirPorMail) {
 		this.nombre = nombre;
@@ -106,7 +104,7 @@ public class Cliente extends Rol {
 		sumarEstrellas(v.getPrecioTotalConDescuento());
 		//v.agregarBeneficio(nivel.beneficio());
 		if(recibirPorMail) {
-			MailSender.getInstance().enviarDetalleDeCompra(mail, v, v.getHechaEnDolares());
+			MailSender.getInstance().enviarDetalleDeCompra(mail, v);
 		}
 	}
 

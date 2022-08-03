@@ -56,7 +56,7 @@ public class MailSender {
     }
 
 
-    public void enviarDetalleDeCompra(String mail, Venta v, Boolean pagaEnDolares) {
+    public void enviarDetalleDeCompra(String mail, Venta v) {
         String cuerpo = this.generarCuerpo(v);
         this.enviarConGMail(mail, "Detalle de tu última compra en Cafe HumiTito", cuerpo);
     }

@@ -9,8 +9,4 @@ public class ApiPrecioDolar {
   public double getCompra() {
     return compra;
   }
-
-  public void setCompra(double compra) {
-    this.compra = compra;
-  }
 }
