@@ -1,5 +1,7 @@
 package parcial1erCuatri.Disenio.domain.Roles;
 
+import parcial1erCuatri.Disenio.domain.Repositorios.RepoPromociones;
+
 import javax.persistence.*;
 
 @Entity

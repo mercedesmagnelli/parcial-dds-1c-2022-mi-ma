@@ -1,26 +1,19 @@
 package parcial1erCuatri.Disenio;
 
-import net.bytebuddy.asm.Advice;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import parcial1erCuatri.Disenio.domain.MedioDeNotificacion.MailSender;
-import parcial1erCuatri.Disenio.domain.Roles.Cliente;
-import parcial1erCuatri.Disenio.domain.Roles.TipoDeDocumento;
+import parcial1erCuatri.Disenio.domain.Repositorios.RepoProductos;
+import parcial1erCuatri.Disenio.domain.Roles.Administrador;
 import parcial1erCuatri.Disenio.domain.Venta.*;
 import parcial1erCuatri.Disenio.domain.exceptions.StockInsuficienteException;
-
-import java.lang.reflect.Array;
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
 
 @SpringBootApplication
 public class DisenioApplication {
 
-	public static void main(String[] args) throws StockInsuficienteException {
+	public static void main(String[] args) {
 		SpringApplication.run(DisenioApplication.class, args);
-
+/*
 		Producto producto1= new Producto("Bebida" , "Coca cola", 150.0, 5);
 		ItemVenta itemDeCompra1 = new ItemVenta(producto1,2, false);
 
@@ -39,7 +32,12 @@ public class DisenioApplication {
 		CarritoDeCompras carritoDeCompra = new CarritoDeCompras(promociones, LocalDate.now(), MedioDePago.EFECTIVO,cliente1,true);
 		carritoDeCompra.setItemsCompras(itemsCompras);
 
+		Administrador administrador = new Administrador();
+		administrador.agregarProductoAlStock(producto1);
+		administrador.agregarProductoAlStock(producto2);
 		//	carritoDeCompra.finalizarVenta(MedioDePago.EFECTIVO);
+*/
+		Producto producto2= new Producto("Snacks" , "chetos", 50.0, 5);
 
 	}
 

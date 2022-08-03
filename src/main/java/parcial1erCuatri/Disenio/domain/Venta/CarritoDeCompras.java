@@ -136,7 +136,6 @@ public class CarritoDeCompras {
         }else{
             return this.calcularPrecio();
         }
-
     }
 
     public double calcularPrecioTotalConPromociones(){

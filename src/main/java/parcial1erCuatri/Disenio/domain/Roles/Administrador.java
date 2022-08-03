@@ -1,6 +1,8 @@
 package parcial1erCuatri.Disenio.domain.Roles;
 
-import parcial1erCuatri.Disenio.domain.Repositorios.RepositorioProductos;
+import org.springframework.beans.factory.annotation.Autowired;
+import parcial1erCuatri.Disenio.domain.Repositorios.RepoProductos;
+import parcial1erCuatri.Disenio.domain.Repositorios.RepoPromociones;
 import parcial1erCuatri.Disenio.domain.Venta.Producto;
 import parcial1erCuatri.Disenio.domain.Venta.Promocion;
 
@@ -9,6 +11,12 @@ import javax.persistence.*;
 @Entity
 @DiscriminatorValue("A")
 public class Administrador extends Rol {
+    @Transient
+    @Autowired
+    RepoPromociones repoPromociones;
+    @Transient
+    @Autowired
+    RepoProductos repoProductos;
 
     public Administrador(String nombre, String apellido, String mail,TipoDeDocumento tipoDocumento,String nroDeDocumento ,String telefono) {
         this.nombre = nombre;
@@ -23,22 +31,34 @@ public class Administrador extends Rol {
 
     }
 
-    public void agregarProductoAlStock(Producto p) {
-
-        RepositorioProductos.getInstance().agregarProducto(p);
-
+    public void setRepoPromociones(RepoPromociones repoPromociones) {
+        this.repoPromociones= repoPromociones;
     }
+
+    public void setRepoProductos(RepoProductos repoProductos) {
+        this.repoProductos = repoProductos;
+    }
+
+    //@Transactional
+    public void agregarProductoAlStock(Producto producto) {
+        repoProductos.save(producto);
+    }
+
     public void eliminarProductoDeStock(Producto producto) {
-        RepositorioProductos.getInstance().eliminarProducto(producto);
+       repoProductos.delete(producto);
     }
-    public void cargarMasStockDeUnProducto(Producto p, int cantidad) {
 
+    public void cargarMasStockDeUnProducto(Producto p, int cantidad) {
+        Producto producto= repoProductos.findById(p.getId()).get();
+
+        producto.setStock(cantidad);
     }
 
     public void cargarPromocion(Promocion promo) {
-
+    repoPromociones.save(promo);
     }
     public void eliminarPromocion(Promocion promo) {
-
+    repoPromociones.delete(promo);
     }
+
 }

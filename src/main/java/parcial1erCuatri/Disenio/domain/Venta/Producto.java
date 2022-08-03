@@ -61,7 +61,15 @@ public class Producto {
 	public void setStock(int stock) {
 		this.stock = stock;
 	}
-	
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
 	//Métodos
 
 	public void restarStock(int cantidad) throws StockInsuficienteException {
