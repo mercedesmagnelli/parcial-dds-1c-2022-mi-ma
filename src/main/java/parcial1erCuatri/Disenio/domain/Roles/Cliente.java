@@ -9,6 +9,7 @@ import parcial1erCuatri.Disenio.domain.exceptions.StockInsuficienteException;
 
 
 import javax.persistence.*;
+import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -23,8 +24,8 @@ public class Cliente extends Rol {
     private int estrellas;
     @Transient
     private Nivel nivel;
-	@Transient
-	private Boolean recibirPorMail;
+		@Transient
+		private Boolean recibirPorMail;
 
 	public Cliente(String nombre, String apellido, String mail, String telefono, TipoDeDocumento tipoDocumento, String nroDeDocumento, Boolean recibirPorMail) {
 		this.nombre = nombre;
@@ -110,6 +111,8 @@ public class Cliente extends Rol {
 
 	public void sumarEstrellas(Double precio) {
 		estrellas += precio / 100;
+		System.out.print("\n"+estrellas);
+		System.out.print("\n"+precio);
 		if(estrellas > nivel.maximoEstrellasPermitidas()) {
 			nivel = nivel.nivelSiguiente();
 		}

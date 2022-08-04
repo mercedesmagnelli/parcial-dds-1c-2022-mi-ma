@@ -12,10 +12,8 @@ import javax.persistence.*;
 @DiscriminatorValue("A")
 public class Administrador extends Rol {
     @Transient
-    @Autowired
     RepoPromociones repoPromociones;
     @Transient
-    @Autowired
     RepoProductos repoProductos;
 
     public Administrador(String nombre, String apellido, String mail,TipoDeDocumento tipoDocumento,String nroDeDocumento ,String telefono) {

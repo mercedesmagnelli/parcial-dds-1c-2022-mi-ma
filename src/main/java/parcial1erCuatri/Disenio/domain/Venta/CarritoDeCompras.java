@@ -63,13 +63,13 @@ public class CarritoDeCompras {
 
     }
 
-    private Venta generarVenta() {
+    public Venta generarVenta() {
         double precioDesc = this.calcularPrecioTotalConPromociones();
         double precioSinDesc = this.calcularPrecioTotalSinPromociones();
         return new Venta(itemsVentas, LocalDate.now(), medioDePago, precioSinDesc, precioDesc, estaEnDolares);
     }
 
-    private void agregarItemAlCarrito(ItemVenta item) {
+    public void agregarItemAlCarrito(ItemVenta item) {
         itemsVentas.add(item);
     }
 
@@ -96,7 +96,6 @@ public class CarritoDeCompras {
     public void setFechaDeVenta(LocalDate fechaDeVenta) {
         this.fechaDeVenta = fechaDeVenta;
     }
-
 
     public MedioDePago getMedioDePago() {
         return medioDePago;
