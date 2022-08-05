@@ -2,9 +2,7 @@ package parcial1erCuatri.Disenio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
-import parcial1erCuatri.Disenio.domain.Repositorios.RepoProductos;
-import parcial1erCuatri.Disenio.domain.Repositorios.RepoPromociones;
-import parcial1erCuatri.Disenio.domain.Repositorios.RepoUsuarios;
+import parcial1erCuatri.Disenio.domain.Repositorios.*;
 import parcial1erCuatri.Disenio.domain.Roles.Administrador;
 import parcial1erCuatri.Disenio.domain.Roles.Cliente;
 import parcial1erCuatri.Disenio.domain.Roles.TipoDeDocumento;
@@ -18,11 +16,17 @@ import java.util.List;
 @Component
 public class InitData implements CommandLineRunner {
   @Autowired
-  RepoProductos repoProductos;
+  private RepoProductos repoProductos;
   @Autowired
-  RepoPromociones repoPromociones;
+  private RepoPromociones repoPromociones;
   @Autowired
-  RepoUsuarios repoUsuarios;
+  private RepoRoles repoUsuarios;
+  @Autowired
+  private RepoCarritos repoCarritos;
+  @Autowired
+  private RepoItemVentas repoItemVentas;
+  @Autowired
+  private Registro registro;
 
   @Override
   public void run(String... args) throws Exception {
@@ -63,16 +67,16 @@ public class InitData implements CommandLineRunner {
       //Creación Cliente
       Cliente cliente1=new Cliente("Lionel Andres","Messi","leomessi@gmail.com","48662200", TipoDeDocumento.DNI,"40976081",false);
       repoUsuarios.save(cliente1);
-      CarritoDeCompras carritoDeCompra = new CarritoDeCompras(Arrays.asList(promoMedioDePago), LocalDate.now(), MedioDePago.EFECTIVO,cliente1,false);
-
-      ItemVenta itemDeCompra1 = new ItemVenta(producto1,2, false);
-      carritoDeCompra.agregarItemAlCarrito(itemDeCompra1);
-      //System.out.print(cliente1.getEstrellas()+"\n");
-      //carritoDeCompra.finalizarVenta();
-      //System.out.print("\n"+cliente1.getEstrellas());
-      //ClienteTocaBoton
-      carritoDeCompra.generarVenta();
-
+      CarritoDeCompras carritoDeCompra1 = new CarritoDeCompras(Arrays.asList(promoMedioDePago), LocalDate.now(), MedioDePago.EFECTIVO,cliente1,false);
+      ItemVenta itemDeVenta1 = new ItemVenta(producto1,2, false);
+      //ItemVenta itemDeVenta2 = new ItemVenta(producto2,4, false);
+      repoItemVentas.save(itemDeVenta1);
+      ArrayList<ItemVenta> listaItem = new ArrayList<>();
+      listaItem.add(itemDeVenta1);
+      carritoDeCompra1.setItemsVentas(listaItem);
+      //registro.registrarItemCarrito(carritoDeCompra1,itemDeVenta1);
+      registro.finalizarVenta(carritoDeCompra1);
+      repoItemVentas.save(itemDeVenta1);
     }
   }
 }

@@ -29,7 +29,7 @@ public class CarritoDeCompraTest {
     Collection<Promocion> promociones = new ArrayList<>();
     Cliente cliente1=new Cliente("Lionel Andres","Messi","leomessi@gmail.com","48662200", TipoDeDocumento.DNI,"40976081",false);
     CarritoDeCompras carritoDeCompra = new CarritoDeCompras(promociones, LocalDate.now(), MedioDePago.EFECTIVO,cliente1,false);
-    carritoDeCompra.setItemsCompras(itemsCompras);
+    carritoDeCompra.setItemsVentas(itemsCompras);
     assertEquals(carritoDeCompra.calcularPrecioTotalConPromociones(),500.0);
   }
 
@@ -46,7 +46,7 @@ public class CarritoDeCompraTest {
     Collection<Promocion> promociones = Arrays.asList(promoMedioDePago);
     Cliente cliente1=new Cliente("Lionel Andres","Messi","leomessi@gmail.com","48662200", TipoDeDocumento.DNI,"40976081",false);
     CarritoDeCompras carritoDeCompra = new CarritoDeCompras(promociones, LocalDate.now(), MedioDePago.EFECTIVO,cliente1,false);
-    carritoDeCompra.setItemsCompras(itemsCompras);
+    carritoDeCompra.setItemsVentas(itemsCompras);
     assertEquals(carritoDeCompra.calcularPrecioTotalConPromociones(),450.0);
   }
 
@@ -63,7 +63,7 @@ public class CarritoDeCompraTest {
     Collection<Promocion> promociones = Arrays.asList(promoMedioDePago);
     Cliente cliente1=new Cliente("Lionel Andres","Messi","leomessi@gmail.com","48662200", TipoDeDocumento.DNI,"40976081",false);
     CarritoDeCompras carritoDeCompra = new CarritoDeCompras(promociones, LocalDate.now(), MedioDePago.EFECTIVO,cliente1,true);
-    carritoDeCompra.setItemsCompras(itemsCompras);
+    carritoDeCompra.setItemsVentas(itemsCompras);
 
     //aca hay un problema de tipos de datos, da erroneo por 10 decimales
     //assertEquals((int)carritoDeCompra.calcularPrecioTotalConPromociones(),(int)(500 * CotizadorDolar.getConfigurador().getPrecioDolar() * 0.95));
@@ -80,7 +80,7 @@ public class CarritoDeCompraTest {
     Collection<Promocion> promociones = new ArrayList<>();
     Cliente cliente1=new Cliente("Lionel Andres","Messi","leomessi@gmail.com","48662200", TipoDeDocumento.DNI,"40976081",false);
     CarritoDeCompras carritoDeCompra = new CarritoDeCompras(promociones, LocalDate.now(), MedioDePago.EFECTIVO,cliente1,true);
-    carritoDeCompra.setItemsCompras(itemsCompras);
+    carritoDeCompra.setItemsVentas(itemsCompras);
     //assertEquals(carritoDeCompra.calcularPrecioTotalConPromociones(),500 * CotizadorDolar.getConfigurador().getPrecioDolar());
   }
 

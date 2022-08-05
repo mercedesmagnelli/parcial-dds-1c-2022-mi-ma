@@ -41,6 +41,7 @@ public class Administrador extends Rol {
     public void agregarProductoAlStock(Producto producto) {
         repoProductos.save(producto);
     }
+    //fachada.guardarProducto(Produ)
 
     public void eliminarProductoDeStock(Producto producto) {
        repoProductos.delete(producto);

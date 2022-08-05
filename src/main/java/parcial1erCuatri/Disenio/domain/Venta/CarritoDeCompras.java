@@ -47,16 +47,8 @@ public class CarritoDeCompras {
         this.estaEnDolares = estaEnDolares;
     }
 
-
-
-    public void finalizarVenta() throws StockInsuficienteException {
-        Venta v = this.generarVenta();
-        cliente.realizarComprar(v);
-        this.limpiarCarrito();
-    }
-
-    private void limpiarCarrito() {
-        this.setItemsCompras(new ArrayList<>());
+    public void limpiarCarrito() {
+        this.setItemsVentas(new ArrayList<>());
         this.setPromociones(new ArrayList<>());
         fechaDeVenta = null;
         medioDePago = null;
@@ -73,11 +65,11 @@ public class CarritoDeCompras {
         itemsVentas.add(item);
     }
 
-    public Collection<ItemVenta> getItemsCompras() {
+    public List<ItemVenta> getItemsVentas() {
         return itemsVentas;
     }
 
-    public void setItemsCompras(ArrayList<ItemVenta> itemsVentas) {
+    public void setItemsVentas(ArrayList<ItemVenta> itemsVentas) {
         this.itemsVentas = itemsVentas;
     }
 

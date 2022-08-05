@@ -6,5 +6,5 @@ import parcial1erCuatri.Disenio.domain.Roles.Rol;
 import parcial1erCuatri.Disenio.domain.Venta.Producto;
 
 @RepositoryRestResource(path="roles")
-public interface RepoUsuarios extends CrudRepository<Rol, Integer> {
+public interface RepoRoles extends CrudRepository<Rol, Integer> {
 }
