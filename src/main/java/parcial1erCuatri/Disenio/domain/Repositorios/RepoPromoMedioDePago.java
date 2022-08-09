@@ -2,10 +2,9 @@ package parcial1erCuatri.Disenio.domain.Repositorios;
 
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
-import org.springframework.stereotype.Repository;
-import org.springframework.web.bind.annotation.CrossOrigin;
+import parcial1erCuatri.Disenio.domain.Venta.PromoMedioDePago;
 import parcial1erCuatri.Disenio.domain.Venta.Promocion;
 
-@RepositoryRestResource(path="promociones")
-public interface RepoPromociones extends CrudRepository<Promocion, Integer> {
+@RepositoryRestResource(path="promoMedioDepago")
+public interface RepoPromoMedioDePago extends CrudRepository<PromoMedioDePago, Integer> {
 }

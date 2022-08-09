@@ -30,7 +30,7 @@ public class InitData implements CommandLineRunner {
 
   @Override
   public void run(String... args) throws Exception {
-    if (repoProductos.count() >= 0) {
+    if (repoProductos.count() == 0) {
       Producto producto1= new Producto("Bebida" , "Coca cola", 150.0, 5);
       Producto producto2= new Producto("Snacks" , "chetos", 50.0, 5);
       Producto lemonPie= new Producto("Porcion grande" , "Lemon Pie", 150.0, 5);

@@ -1,18 +1,23 @@
 package parcial1erCuatri.Disenio.domain.Venta;
 
-import javax.persistence.DiscriminatorValue;
-import javax.persistence.Entity;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+
+import javax.persistence.*;
 
 @Entity
-@DiscriminatorValue("MedioDePago")
-public class PromoMedioDePago extends Promocion {
+@DiscriminatorValue("1")
+@JsonDeserialize(contentAs= PromoMedioDePago.class)
+public class PromoMedioDePago extends Promocion{
+	@Enumerated(EnumType.STRING)
+	@Column(name = "medioDePago")
 	private MedioDePago medioDePago;
 	private Double porcentaje;
-	
-	protected PromoMedioDePago() {
+
+	public PromoMedioDePago() {
 		super();
 	}
-	
+
 	public PromoMedioDePago(MedioDePago medioDePago, double porcentaje) {
 		super();
 		this.medioDePago = medioDePago;
@@ -22,7 +27,7 @@ public class PromoMedioDePago extends Promocion {
 	@Override
 	public Double aplicar(CarritoDeCompras carritoDeCompra) {
 		if(carritoDeCompra.getMedioDePago().equals(this.medioDePago)) {
-			return carritoDeCompra.calcularPrecio() * porcentaje;
+			return carritoDeCompra.calcularPrecioTotalSinPromociones() * porcentaje;
 		}
 		return 0.0;
 	}
@@ -42,5 +47,8 @@ public class PromoMedioDePago extends Promocion {
 	public void setPorcentaje(double porcentaje) {
 		this.porcentaje = porcentaje;
 	}
-	
+
+	public void setPorcentaje(Double porcentaje) {
+		this.porcentaje = porcentaje;
+	}
 }

@@ -1,5 +1,6 @@
 package parcial1erCuatri.Disenio.domain.Venta;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import parcial1erCuatri.Disenio.domain.Roles.Cliente;
 
 import javax.persistence.DiscriminatorValue;
@@ -8,8 +9,9 @@ import javax.persistence.ManyToMany;
 import java.util.Collection;
 
 @Entity
-@DiscriminatorValue("Membresia")
-public class Membresia extends Promocion {
+@DiscriminatorValue("2")
+@JsonDeserialize(contentAs= Membresia.class)
+public class Membresia extends Promocion{
 	@ManyToMany
 	private Collection<Cliente> clientes;
 	private Double porcentajeDescuento;
@@ -17,18 +19,18 @@ public class Membresia extends Promocion {
 	@Override
 	public Double aplicar(CarritoDeCompras carritoDeCompra) {
 		if(clientes.contains(carritoDeCompra.getCliente())) {
-			return carritoDeCompra.calcularPrecio() * porcentajeDescuento;
+			return carritoDeCompra.calcularPrecioTotalSinPromociones() * porcentajeDescuento;
 		}else {
 			return 0.0;
 		}
 
 	}
 
-	protected Membresia() {
+	public Membresia() {
 		super();
 	}
 
-	public Membresia(Collection<Cliente> clientes, double porcentajeDescuento) {
+	public Membresia(Collection<Cliente> clientes,double porcentajeDescuento) {
 		super();
 		this.clientes = clientes;
 		this.porcentajeDescuento = porcentajeDescuento;
@@ -50,4 +52,7 @@ public class Membresia extends Promocion {
 		this.porcentajeDescuento = porcentajeDescuento;
 	}
 
+	public void setPorcentajeDescuento(Double porcentajeDescuento) {
+		this.porcentajeDescuento = porcentajeDescuento;
+	}
 }
