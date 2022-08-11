@@ -11,9 +11,11 @@ public abstract class Promocion {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
 
-	public Double aplicar(CarritoDeCompras CarritoDeCompra) {
-		return null;
+	public Promocion() {
+
 	}
+
+	public abstract Double aplicar(CarritoDeCompras CarritoDeCompra);
 
 	public Integer getId() {
 		return id;

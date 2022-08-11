@@ -19,6 +19,17 @@ public class ItemVenta {
 	}
 
 	//
+
+	public ItemVenta(Producto producto, int cantidad) throws StockInsuficienteException {
+		super();
+		producto.restarStock(cantidad);
+		this.producto = producto;
+		this.cantidad = cantidad;
+		this.precioCompra = producto.getPrecio();
+	}
+
+
+
 	public ItemVenta(Producto producto, int cantidad, Boolean esBeneficio) throws StockInsuficienteException {
 		super();
 		producto.restarStock(cantidad);

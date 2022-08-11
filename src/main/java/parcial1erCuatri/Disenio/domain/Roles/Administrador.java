@@ -1,6 +1,7 @@
 package parcial1erCuatri.Disenio.domain.Roles;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import parcial1erCuatri.Disenio.domain.Repositorios.RepoProductos;
 import parcial1erCuatri.Disenio.domain.Repositorios.RepoPromociones;
 import parcial1erCuatri.Disenio.domain.Venta.Producto;
@@ -37,25 +38,28 @@ public class Administrador extends Rol {
         this.repoProductos = repoProductos;
     }
 
-    //@Transactional
+    @Transactional
     public void agregarProductoAlStock(Producto producto) {
         repoProductos.save(producto);
     }
-    //fachada.guardarProducto(Produ)
 
+    @Transactional
     public void eliminarProductoDeStock(Producto producto) {
        repoProductos.delete(producto);
     }
 
+    @Transient
     public void cargarMasStockDeUnProducto(Producto p, int cantidad) {
-        Producto producto= repoProductos.findById(p.getId()).get();
-
-        producto.setStock(cantidad);
+        Producto producto = repoProductos.findById(p.getId()).get();
+        producto.setStock(cantidad + p.getStock());
     }
 
+    @Transient
     public void cargarPromocion(Promocion promo) {
     repoPromociones.save(promo);
     }
+
+    @Transient
     public void eliminarPromocion(Promocion promo) {
     repoPromociones.delete(promo);
     }

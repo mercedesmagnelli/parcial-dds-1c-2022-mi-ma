@@ -6,6 +6,8 @@ import javax.persistence.*;
 
 @Entity
 public class Usuario {
+
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
@@ -14,8 +16,46 @@ public class Usuario {
     @ManyToOne
     private Rol rol;
 
-    public void validarContrasenia() {
+    public Usuario() {
 
     }
-    
+
+    public Usuario(String usuario, String contrasenia, Rol rol) {
+
+        this.usuario = usuario;
+        this.contrasenia = contrasenia;
+        this.rol = rol;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
+    }
+
+    public void setContrasenia(String contrasenia) {
+        this.contrasenia = contrasenia;
+    }
+
+    public void setRol(Rol rol) {
+        this.rol = rol;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public String getUsuario() {
+        return usuario;
+    }
+
+    public String getContrasenia() {
+        return contrasenia;
+    }
+
+    public Rol getRol() {
+        return rol;
+    }
 }
