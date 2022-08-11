@@ -14,7 +14,7 @@ public class Venta {
 	@OneToMany
 	@JoinColumn(name = "venta_id")
 	@OrderColumn(name = "posicion")
-	public List<ItemVenta> itemsVenta;
+	public Collection<ItemVenta> itemsVenta;
 	@Enumerated(EnumType.STRING)
 	private MedioDePago medioDePago;
 	private LocalDate fechaDeVenta;
@@ -32,7 +32,7 @@ public class Venta {
 		super();
 	}
 
-	public Venta(List<ItemVenta> itemsVenta,
+	public Venta(Collection<ItemVenta> itemsVenta,
             LocalDate fechaDeVenta, MedioDePago medioDePago, double precioTotalSinDescuento , double precioTotalConDescuento, Boolean hechaEnDolares) {
 		this.itemsVenta = itemsVenta;
 		this.medioDePago = medioDePago;
@@ -46,7 +46,7 @@ public class Venta {
 		return hechaEnDolares;
 	}
 
-	public List<ItemVenta> getItemsVentas() {
+	public Collection<ItemVenta> getItemsVentas() {
 		return itemsVenta;
 	}
 

@@ -18,11 +18,10 @@ public class CarritoDeCompras {
 
     @OneToMany
     @JoinColumn(name = "carritoDeCompras_id")
-    @OrderColumn(name = "posicion")
-    private List<ItemVenta> itemsVentas = new ArrayList<>();
+    private Collection<ItemVenta> itemsVentas;
 
     @ManyToMany
-    private Collection<Promocion> promociones = new ArrayList<>();
+    private Collection<Promocion> promociones;
 
     private LocalDate fechaDeVenta;
 
@@ -48,8 +47,8 @@ public class CarritoDeCompras {
     }
 
     public void limpiarCarrito() {
-        this.setItemsVentas(new ArrayList<>());
-        this.setPromociones(new ArrayList<>());
+        itemsVentas.clear();
+        promociones.clear();
         fechaDeVenta = null;
         medioDePago = null;
 
@@ -65,11 +64,11 @@ public class CarritoDeCompras {
         itemsVentas.add(item);
     }
 
-    public List<ItemVenta> getItemsVentas() {
+    public Collection<ItemVenta> getItemsVentas() {
         return itemsVentas;
     }
 
-    public void setItemsVentas(ArrayList<ItemVenta> itemsVentas) {
+    public void setItemsVentas(Collection<ItemVenta> itemsVentas) {
         this.itemsVentas = itemsVentas;
     }
 
@@ -116,7 +115,7 @@ public class CarritoDeCompras {
 
     public double calcularPrecio() {
 
-        return itemsVentas.stream().mapToDouble(x->x.calcularPrecioItem()).sum();
+        return itemsVentas.stream().mapToDouble(ItemVenta::calcularPrecioItem).sum();
     }
 
     public double calcularPrecioTotalSinPromociones(){

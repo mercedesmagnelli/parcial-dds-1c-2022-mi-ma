@@ -9,6 +9,8 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 public class MailSender {
@@ -64,10 +66,11 @@ public class MailSender {
     private String generarCuerpo(Venta v) {
 
         String cuerpo = "Los detalles de tu compra en nuestro café es la siguiente \n \n";
-
+        List<ItemVenta> aux = (ArrayList)v.getItemsVentas();
         for(int i=0; i < v.getItemsVentas().size(); i ++){
 
-            ItemVenta itemEnIndice = v.getItemsVentas().get(i);
+
+            ItemVenta itemEnIndice = aux.get(i);
             cuerpo = cuerpo + itemEnIndice.getProducto().getNombre() + "x"
                     + itemEnIndice.getCantidad() + " \n $" + itemEnIndice.getProducto().getPrecio() * itemEnIndice.getCantidad()
                     + "\n";

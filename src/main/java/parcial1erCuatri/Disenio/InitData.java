@@ -9,6 +9,7 @@ import parcial1erCuatri.Disenio.domain.Venta.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 
 @Component
@@ -31,11 +32,13 @@ public class InitData implements CommandLineRunner {
 
   @Override
   public void run(String... args) throws Exception {
-    if (repoProductos.count() == 0) {
+
+    //Inicializamos base de datos con datos precargados
+    if (repoProductos.count() >= 0) {
 
       //agregamos productos
-      Producto producto1 = new Producto("Bebida" , "Coca cola", 150.0, 500);
-      Producto producto2 = new Producto("Snacks" , "chetos", 50.0, 500);
+      Producto cocaCola = new Producto("Bebida" , "Coca cola", 150.0, 500);
+      Producto jugoDeNaranja = new Producto("Jugo de Naranja Exprimido" , "Jugo Naranja", 50.0, 500);
       Producto lemonPie = new Producto("Porcion grande" , "Lemon Pie", 150.0, 500);
       Producto chocotorta = new Producto("Porcion mediana" , "Chocotorta", 250.0, 500);
       Producto tortaOreo = new Producto("Porcion pequeña" , "Torta Oreo", 350.0, 50);
@@ -44,9 +47,7 @@ public class InitData implements CommandLineRunner {
       Producto cookie = new Producto("Galletita con chispas de chocolate", "Cookie", 300.0, 350);
 
 
-
-
-      List<Producto> productosIniciales = new ArrayList<>(Arrays.asList(producto1, producto2, lemonPie, chocotorta, tortaOreo, chocolatada, cafeConLeche, cookie));
+      List<Producto> productosIniciales = new ArrayList<>(Arrays.asList(cocaCola, jugoDeNaranja, lemonPie, chocotorta, tortaOreo, chocolatada, cafeConLeche, cookie));
 
 
       Administrador administrador1 = new Administrador("jorge", "castro", "jorgecastro@gmail.com", TipoDeDocumento.DNI,"23789877" ,"47750077");
@@ -70,7 +71,7 @@ public class InitData implements CommandLineRunner {
       usuarios.forEach(repoUsuarios::save);
 
 
-      //seteamos de los repositorios en el administrador
+      //seteamos de los repositorios en el administrador para poder interactuar con ellos
 
       administrador1.setRepoProductos(repoProductos);
       administrador1.setRepoPromociones(repoPromociones);
@@ -89,23 +90,19 @@ public class InitData implements CommandLineRunner {
       promocionesIniciales.forEach(administrador1::cargarPromocion);
 
      administrador1.eliminarPromocion(promoMedioDePagoDebito);
-     administrador1.eliminarProductoDeStock(producto2);
+     administrador1.eliminarProductoDeStock(jugoDeNaranja);
 
 
-     ///// ------- COMIENZA EL PROCESO DE COMPRA ------- ////
+     ///// ------- EJEMPLO PARA VISUALIZAR EL PROCESO DE COMPRA ------- ////
+      //
+      Collection<Promocion> promos = new ArrayList<>();
+      promos.add(promoMedioDePago);
 
+    CarritoDeCompras carritoDeCompra1 = new CarritoDeCompras(promos, LocalDate.now(), MedioDePago.EFECTIVO,messi,false);
+    ItemVenta itemDeVenta1 = new ItemVenta(cocaCola,2, false);
+    registro.registrarItemCarrito(carritoDeCompra1, itemDeVenta1);
+    registro.finalizarVenta(carritoDeCompra1);
 
-
-    CarritoDeCompras carritoDeCompra1 = new CarritoDeCompras(Arrays.asList(promoMedioDePago), LocalDate.now(), MedioDePago.EFECTIVO,messi,false);
-     ItemVenta itemDeVenta1 = new ItemVenta(producto1,2, false);
-
-     repoItemVentas.save(itemDeVenta1);
-      ArrayList<ItemVenta> listaItem = new ArrayList<>();
-      listaItem.add(itemDeVenta1);
-      carritoDeCompra1.setItemsVentas(listaItem);
-
-      registro.finalizarVenta(carritoDeCompra1);
-      repoItemVentas.save(itemDeVenta1);
     }
   }
 }
