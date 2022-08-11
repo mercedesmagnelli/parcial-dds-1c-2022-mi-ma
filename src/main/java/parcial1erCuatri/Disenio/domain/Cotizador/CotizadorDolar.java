@@ -30,7 +30,7 @@ public final class CotizadorDolar{
         return precioDolar;
     }
 
-    //@Scheduled(fixedRate = 1000)
+    @Scheduled(fixedRate = 1000)
     public void actualizarPrecioDolar() {
         this.precioDolar = this.run(restTemplate).getCompra();
         System.out.println("Se actualizo el precio del dolar");

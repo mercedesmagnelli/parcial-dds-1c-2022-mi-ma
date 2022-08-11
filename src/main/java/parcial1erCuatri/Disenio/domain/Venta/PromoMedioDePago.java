@@ -6,15 +6,14 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import javax.persistence.*;
 
 @Entity
-@DiscriminatorValue("1")
-@JsonDeserialize(contentAs= PromoMedioDePago.class)
+@DiscriminatorValue("MedioDePago")
 public class PromoMedioDePago extends Promocion{
 	@Enumerated(EnumType.STRING)
 	@Column(name = "medioDePago")
 	private MedioDePago medioDePago;
 	private Double porcentaje;
 
-	public PromoMedioDePago() {
+	protected PromoMedioDePago() {
 		super();
 	}
 
@@ -48,7 +47,4 @@ public class PromoMedioDePago extends Promocion{
 		this.porcentaje = porcentaje;
 	}
 
-	public void setPorcentaje(Double porcentaje) {
-		this.porcentaje = porcentaje;
-	}
 }

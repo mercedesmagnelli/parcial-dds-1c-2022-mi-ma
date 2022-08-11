@@ -9,8 +9,6 @@ import parcial1erCuatri.Disenio.domain.Roles.Cliente;
 import parcial1erCuatri.Disenio.domain.Venta.*;
 import parcial1erCuatri.Disenio.domain.exceptions.StockInsuficienteException;
 
-import java.time.LocalDate;
-import java.util.ArrayList;
 @Service
 public class Registro {
   @Autowired
@@ -30,42 +28,6 @@ public class Registro {
 
   }
 
-  //Cosas del admi
-  public void setRepoPromociones(RepoPromociones repoPromociones) {
-    this.repoPromociones= repoPromociones;
-  }
-
-  public void setRepoProductos(RepoProductos repoProductos) {
-    this.repoProductos = repoProductos;
-  }
-
-  //@Transactional
-  public void agregarProductoAlStock(Producto producto) {
-    repoProductos.save(producto);
-  }
-  //fachada.guardarProducto(Produ)
-
-  public void eliminarProductoDeStock(Producto producto) {
-    repoProductos.delete(producto);
-  }
-
-  public void cargarMasStockDeUnProducto(Producto p, int cantidad) {
-    Producto producto= repoProductos.findById(p.getId()).get();
-
-    producto.setStock(cantidad);
-  }
-
-  public void cargarPromocion(Promocion promo) {
-    repoPromociones.save(promo);
-  }
-  public void eliminarPromocion(Promocion promo) {
-    repoPromociones.delete(promo);
-  }
-
-  //Cosas del cliente
-  /*
-  1- Registrar item
-   */
   public void registrarItemCarrito(CarritoDeCompras carritoDeCompras, ItemVenta itemVenta){
     carritoDeCompras.agregarItemAlCarrito(itemVenta);
     repoCarritos.save(carritoDeCompras);
@@ -81,5 +43,4 @@ public class Registro {
     repoRoles.save(cliente);
     repoCarritos.save(carritoDeCompras);
   }
-
 }

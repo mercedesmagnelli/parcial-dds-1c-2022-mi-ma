@@ -9,8 +9,7 @@ import javax.persistence.ManyToMany;
 import java.util.Collection;
 
 @Entity
-@DiscriminatorValue("2")
-@JsonDeserialize(contentAs= Membresia.class)
+@DiscriminatorValue("Membresia")
 public class Membresia extends Promocion{
 	@ManyToMany
 	private Collection<Cliente> clientes;
@@ -26,7 +25,7 @@ public class Membresia extends Promocion{
 
 	}
 
-	public Membresia() {
+	protected Membresia() {
 		super();
 	}
 
@@ -52,7 +51,4 @@ public class Membresia extends Promocion{
 		this.porcentajeDescuento = porcentajeDescuento;
 	}
 
-	public void setPorcentajeDescuento(Double porcentajeDescuento) {
-		this.porcentajeDescuento = porcentajeDescuento;
-	}
 }

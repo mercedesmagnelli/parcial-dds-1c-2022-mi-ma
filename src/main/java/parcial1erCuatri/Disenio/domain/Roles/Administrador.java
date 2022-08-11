@@ -37,11 +37,9 @@ public class Administrador extends Rol {
         this.repoProductos = repoProductos;
     }
 
-    //@Transactional
     public void agregarProductoAlStock(Producto producto) {
         repoProductos.save(producto);
     }
-    //fachada.guardarProducto(Produ)
 
     public void eliminarProductoDeStock(Producto producto) {
        repoProductos.delete(producto);
@@ -51,6 +49,7 @@ public class Administrador extends Rol {
         Producto producto= repoProductos.findById(p.getId()).get();
 
         producto.setStock(cantidad);
+        repoProductos.save(producto);
     }
 
     public void cargarPromocion(Promocion promo) {
