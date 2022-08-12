@@ -1,17 +1,14 @@
 package parcial1erCuatri.Disenio.domain.Roles;
 
 
-import parcial1erCuatri.Disenio.domain.MedioDeNotificacion.MailSender;
 import parcial1erCuatri.Disenio.domain.Nivel.Bronce;
 import parcial1erCuatri.Disenio.domain.Nivel.Nivel;
-import parcial1erCuatri.Disenio.domain.Nivel.Plata;
+import parcial1erCuatri.Disenio.domain.Venta.CarritoDeCompras;
 import parcial1erCuatri.Disenio.domain.Venta.Venta;
 import parcial1erCuatri.Disenio.domain.exceptions.StockInsuficienteException;
 
 
 import javax.persistence.*;
-import javax.transaction.Transactional;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -106,7 +103,7 @@ public class Cliente extends Rol {
 		sumarEstrellas(v.getPrecioTotalConDescuento());
 		v.agregarBeneficio(nivel.beneficio());
 		if(recibirPorMail) {
-			MailSender.getInstance().enviarDetalleDeCompra(mail, v);
+			CarritoDeCompras.MailSender.getInstance().enviarDetalleDeCompra(mail, v);
 		}
 	}
 

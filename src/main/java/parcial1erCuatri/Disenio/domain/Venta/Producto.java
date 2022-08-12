@@ -79,5 +79,9 @@ public class Producto {
 		this.stock= stock- cantidad;
 	}
 
+	public void sumarStock(int cantidad) {
+		this.stock = stock + cantidad;
+	}
+
 
 }

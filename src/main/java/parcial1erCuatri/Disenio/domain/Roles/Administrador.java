@@ -46,9 +46,8 @@ public class Administrador extends Rol {
     }
 
     public void cargarMasStockDeUnProducto(Producto p, int cantidad) {
-        Producto producto= repoProductos.findById(p.getId()).get();
-
-        producto.setStock(cantidad);
+        Producto producto = repoProductos.findById(p.getId()).get();
+        producto.sumarStock(cantidad);
         repoProductos.save(producto);
     }
 
