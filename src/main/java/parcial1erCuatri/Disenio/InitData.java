@@ -30,7 +30,7 @@ public class InitData implements CommandLineRunner {
 
   @Override
   public void run(String... args) throws Exception {
-    if (repoProductos.count() >= 0) {
+    if (repoProductos.count() == 0) {
 
       //agregamos productos
       Producto cocaCola = new Producto("Bebida" , "Coca cola", 150.0, 500);
@@ -79,30 +79,18 @@ public class InitData implements CommandLineRunner {
       administrador1.eliminarPromocion(promoMedioDePagoDebito);
       administrador1.eliminarProductoDeStock(jugoDeNaranja);
 
-      //Creación Cliente
-      /*
-      Cliente cliente1=new Cliente("Lionel Andres","Messi","leomessi@gmail.com","48662200", TipoDeDocumento.DNI,"40976081",false);
-      repoUsuarios.save(cliente1);
-      CarritoDeCompras carritoDeCompra1 = new CarritoDeCompras(Arrays.asList(promoMedioDePago), LocalDate.now(), MedioDePago.EFECTIVO,cliente1,false);
-      ItemVenta itemDeVenta1 = new ItemVenta(producto1,2, false);
-      //ItemVenta itemDeVenta2 = new ItemVenta(producto2,4, false);
-      repoItemVentas.save(itemDeVenta1);
-      ArrayList<ItemVenta> listaItem = new ArrayList<>();
-      listaItem.add(itemDeVenta1);
-      carritoDeCompra1.setItemsVentas(listaItem);
-      //registro.registrarItemCarrito(carritoDeCompra1,itemDeVenta1);
-      registro.finalizarVenta(carritoDeCompra1);
-      repoItemVentas.save(itemDeVenta1);
+      messi.getNivel().setRepoProductos(repoProductos);
 
-       */
       CarritoDeCompras carritoDeCompra1 = new CarritoDeCompras(Arrays.asList(promoMedioDePago), LocalDate.now(), MedioDePago.EFECTIVO,messi,false);
+      repoCarritos.save(carritoDeCompra1);
+
       ItemVenta itemDeVenta1 = new ItemVenta(cocaCola,2, false);
-
       repoItemVentas.save(itemDeVenta1);
+
       registro.registrarItemCarrito(carritoDeCompra1,itemDeVenta1);
-
       registro.finalizarVenta(carritoDeCompra1);
-      repoItemVentas.save(itemDeVenta1);
+
+
     }
   }
 }

@@ -9,6 +9,8 @@ import parcial1erCuatri.Disenio.domain.Roles.Cliente;
 import parcial1erCuatri.Disenio.domain.Venta.*;
 import parcial1erCuatri.Disenio.domain.exceptions.StockInsuficienteException;
 
+import javax.transaction.Transactional;
+
 @Service
 public class Registro {
   @Autowired
@@ -28,11 +30,14 @@ public class Registro {
 
   }
 
+
   public void registrarItemCarrito(CarritoDeCompras carritoDeCompras, ItemVenta itemVenta){
     carritoDeCompras.agregarItemAlCarrito(itemVenta);
     repoCarritos.save(carritoDeCompras);
     repoItemVentas.save(itemVenta);
   }
+
+
 
   public void finalizarVenta(CarritoDeCompras carritoDeCompras) throws StockInsuficienteException {
     Venta venta = carritoDeCompras.generarVenta();
@@ -42,5 +47,6 @@ public class Registro {
     carritoDeCompras.limpiarCarrito();
     repoRoles.save(cliente);
     repoCarritos.save(carritoDeCompras);
+
   }
 }

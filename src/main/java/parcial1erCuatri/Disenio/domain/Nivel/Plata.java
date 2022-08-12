@@ -1,11 +1,13 @@
 package parcial1erCuatri.Disenio.domain.Nivel;
 
+import parcial1erCuatri.Disenio.domain.Repositorios.RepoProductos;
 import parcial1erCuatri.Disenio.domain.Venta.ItemVenta;
 import parcial1erCuatri.Disenio.domain.exceptions.StockInsuficienteException;
 
 public class Plata extends Nivel {
 
-    public Plata() {
+    public Plata(RepoProductos repo) {
+        repoProductos = repo;
         maximo = 1000;
     }
 
@@ -16,7 +18,7 @@ public class Plata extends Nivel {
 
     @Override
     public Nivel nivelSiguiente() {
-        return new Oro();
+        return new Oro(repoProductos);
     }
 
     @Override

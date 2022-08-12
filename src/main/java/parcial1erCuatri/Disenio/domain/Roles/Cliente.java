@@ -4,6 +4,7 @@ package parcial1erCuatri.Disenio.domain.Roles;
 import parcial1erCuatri.Disenio.domain.MedioDeNotificacion.MailSender;
 import parcial1erCuatri.Disenio.domain.Nivel.Bronce;
 import parcial1erCuatri.Disenio.domain.Nivel.Nivel;
+import parcial1erCuatri.Disenio.domain.Nivel.Plata;
 import parcial1erCuatri.Disenio.domain.Venta.Venta;
 import parcial1erCuatri.Disenio.domain.exceptions.StockInsuficienteException;
 
@@ -103,7 +104,7 @@ public class Cliente extends Rol {
 	public void realizarComprar(Venta v) throws StockInsuficienteException {
 		ventas.add(v);
 		sumarEstrellas(v.getPrecioTotalConDescuento());
-		//v.agregarBeneficio(nivel.beneficio());
+		v.agregarBeneficio(nivel.beneficio());
 		if(recibirPorMail) {
 			MailSender.getInstance().enviarDetalleDeCompra(mail, v);
 		}
