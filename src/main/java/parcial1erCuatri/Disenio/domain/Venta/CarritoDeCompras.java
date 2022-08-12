@@ -132,11 +132,14 @@ public class CarritoDeCompras {
     public double calcularPrecioTotalConPromociones(){
         if(this.getEstaEnDolares()){
             CotizadorDolar cotizadorDolar = CotizadorDolar.getConfigurador();
-            System.out.print("descuento de las promos: " + (promociones.stream().mapToDouble(x->x.aplicar(this)).sum()));
-            return (this.calcularPrecio() - (promociones.stream().mapToDouble(x->x.aplicar(this)).sum())) / cotizadorDolar.getPrecioDolar();
+           return (this.calcularPrecio() - (promociones.stream().mapToDouble(x->x.aplicar(this)).sum())) / cotizadorDolar.getPrecioDolar();
         }else{
             return this.calcularPrecio() - promociones.stream().mapToDouble(x->x.aplicar(this)).sum();
         }
+    }
+
+    public void eliminarItemAlCarrito(ItemVenta itemVenta) {
+        itemsVentas.remove(itemVenta);
     }
 }
 

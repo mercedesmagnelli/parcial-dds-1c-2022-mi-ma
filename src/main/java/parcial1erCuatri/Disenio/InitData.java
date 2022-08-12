@@ -31,7 +31,6 @@ public class InitData implements CommandLineRunner {
   @Override
   public void run(String... args) throws Exception {
     if (repoProductos.count() == 0) {
-
       //agregamos productos
       Producto cocaCola = new Producto("Bebida" , "Coca cola", 150.0, 500);
       Producto jugoDeNaranja = new Producto("Jugo de Naranja Exprimido" , "Jugo Naranja", 50.0, 500);
@@ -89,6 +88,7 @@ public class InitData implements CommandLineRunner {
 
       registro.registrarItemCarrito(carritoDeCompra1,itemDeVenta1);
       registro.finalizarVenta(carritoDeCompra1);
+
 
 
     }

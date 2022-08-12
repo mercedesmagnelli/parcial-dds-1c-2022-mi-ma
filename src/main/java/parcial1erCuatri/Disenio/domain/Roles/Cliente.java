@@ -112,8 +112,6 @@ public class Cliente extends Rol {
 
 	public void sumarEstrellas(Double precio) {
 		estrellas += precio / 100;
-		System.out.print("\n"+estrellas);
-		System.out.print("\n"+precio);
 		if(estrellas > nivel.maximoEstrellasPermitidas()) {
 			nivel = nivel.nivelSiguiente();
 		}

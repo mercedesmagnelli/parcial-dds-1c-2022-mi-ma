@@ -37,6 +37,11 @@ public class Registro {
     repoItemVentas.save(itemVenta);
   }
 
+  public void eliminarItemCarrito(CarritoDeCompras carritoDeCompras, ItemVenta itemVenta){
+    carritoDeCompras.eliminarItemAlCarrito(itemVenta);
+    repoCarritos.save(carritoDeCompras);
+    repoItemVentas.save(itemVenta);
+  }
 
 
   public void finalizarVenta(CarritoDeCompras carritoDeCompras) throws StockInsuficienteException {

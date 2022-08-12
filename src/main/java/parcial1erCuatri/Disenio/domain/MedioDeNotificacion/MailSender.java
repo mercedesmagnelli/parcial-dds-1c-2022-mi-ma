@@ -72,7 +72,7 @@ public class MailSender {
                     + itemEnIndice.getCantidad() + " \n $" + itemEnIndice.getProducto().getPrecio() * itemEnIndice.getCantidad()
                     + "\n";
 
-           System.out.print(cuerpo);
+
         }
 
         String moneda = "$";
@@ -83,7 +83,7 @@ public class MailSender {
 
         cuerpo = cuerpo + "\n TOTAL DE LA COMPRA SIN DESCUENTOS: " + moneda + v.getPrecioTotalSinDescuento() +
         "\n TOTAL DE LA COMPRA CON DESCUENTOS: " + moneda + v.getPrecioTotalConDescuento() + "\n";
-        System.out.print(cuerpo);
+
         return cuerpo;
     }
 }
