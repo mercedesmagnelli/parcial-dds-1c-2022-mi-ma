@@ -1,6 +1,7 @@
 package parcial1erCuatri.Disenio.domain.Roles;
 
 
+import parcial1erCuatri.Disenio.domain.MailSender;
 import parcial1erCuatri.Disenio.domain.Nivel.Bronce;
 import parcial1erCuatri.Disenio.domain.Nivel.Nivel;
 import parcial1erCuatri.Disenio.domain.Venta.CarritoDeCompras;
@@ -103,7 +104,7 @@ public class Cliente extends Rol {
 		sumarEstrellas(v.getPrecioTotalConDescuento());
 		v.agregarBeneficio(nivel.beneficio());
 		if(recibirPorMail) {
-			CarritoDeCompras.MailSender.getInstance().enviarDetalleDeCompra(mail, v);
+			MailSender.getInstance().enviarDetalleDeCompra(mail, v);
 		}
 	}
 
